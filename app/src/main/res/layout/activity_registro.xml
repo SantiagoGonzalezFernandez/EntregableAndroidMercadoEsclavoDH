@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorFondo"
+    android:padding="16dp"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegistroActivity_TextInputLayout_Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textColorHint="@color/colorTexto">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/RegistroActivity_TextInputEditText_Email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorTexto"
+                android:gravity="center_horizontal"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/colorTexto"
+                android:textColorHint="@color/colorTexto" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegistroActivity_TextInputLayout_Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/colorTexto">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/RegistroActivity_TextInputEditText_Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorTexto"
+                android:gravity="center_horizontal"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textColor="@color/colorTexto"
+                android:textColorHint="@color/colorTexto" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegistroActivity_TextInputLayout_Nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/colorTexto">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/RegistroActivity_TextInputEditText_Nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorTexto"
+                android:gravity="center_horizontal"
+                android:hint="@string/nombre"
+                android:inputType="text"
+                android:textColor="@color/colorTexto"
+                android:textColorHint="@color/colorTexto" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegistroActivity_TextInputLayout_Apellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/colorTexto">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/RegistroActivity_TextInputEditText_Apellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorTexto"
+                android:gravity="center_horizontal"
+                android:hint="@string/apellido"
+                android:inputType="text"
+                android:textColor="@color/colorTexto"
+                android:textColorHint="@color/colorTexto" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegistroActivity_TextInputLayout_Edad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/colorTexto">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/RegistroActivity_TextInputEditText_Edad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorTexto"
+                android:gravity="center_horizontal"
+                android:hint="@string/edad"
+                android:inputType="number"
+                android:textColor="@color/colorTexto"
+                android:textColorHint="@color/colorTexto" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegistroActivity_TextInputLayout_Nacionalidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColorHint="@color/colorTexto">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/RegistroActivity_TextInputEditText_Nacionalidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorTexto"
+                android:gravity="center_horizontal"
+                android:hint="@string/nacionalidad"
+                android:inputType="text"
+                android:textColor="@color/colorTexto"
+                android:textColorHint="@color/colorTexto" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/RegistroActivity_Button_Registrarse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/colorDestacado"
+            android:text="@string/registrarse"
+            android:textColor="@color/colorTexto" />
+
+        <Button
+            android:id="@+id/RegistroActivity_Button_Regresar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/colorDestacado"
+            android:text="@string/regresar"
+            android:textColor="@color/colorTexto" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

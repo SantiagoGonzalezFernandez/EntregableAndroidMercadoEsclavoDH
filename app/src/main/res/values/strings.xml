@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">MercadoEsclavoDH</string>
+
+    <string name="inciar_sesion">Inciar Sesion</string>
+    <string name="ingresar_sin_registrarse">Ingresar sin registrarse</string>
+    <string name="crear_una_cuenta">Crear Una Cuenta</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
+    <string name="registrarse">Registrarse</string>
+    <string name="regresar">Regresar</string>
+    <string name="nombre">Nombre</string>
+    <string name="edad">Edad</string>
+    <string name="sexo">Sexo</string>
+    <string name="nacionalidad">Nacionalidad</string>
+    <string name="apellido">Apellido</string>
 </resources>
