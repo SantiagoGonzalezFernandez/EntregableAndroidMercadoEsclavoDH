@@ -14,4 +14,11 @@
     <string name="sexo">Sexo</string>
     <string name="nacionalidad">Nacionalidad</string>
     <string name="apellido">Apellido</string>
+    <string name="about_us">About Us</string>
+    <string name="perfil">Perfil</string>
+    <string name="home">Home</string>
+    <string name="cerrar_sesion">Cerrar Sesion</string>
+
+    <string name="open_drawer">Open Drawer</string>
+    <string name="close_drawer">Close Drawer</string>
 </resources>
