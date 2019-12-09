@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/colorFondo"
+    tools:context=".view.activity.MainActivity">
 
     <include
         android:id="@+id/MainActivity_Include_Toolbar"
@@ -14,7 +15,8 @@
         android:id="@+id/MainActivity_DrawerLayout_Contenedor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?actionBarSize">
+        android:layout_marginTop="?actionBarSize"
+        android:layout_marginBottom="?actionBarSize">
 
         <FrameLayout
             android:id="@+id/MainActivity_FrameLayout_ContenedorDeFragments"
@@ -33,5 +35,14 @@
         </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/MainActivity_BottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorFondoBottomNavigationView"
+        app:itemTextColor="@color/colorTexto"
+        app:menu="@menu/bottom_navigation_view" />
 
 </FrameLayout>

@@ -1,4 +1,4 @@
-package com.santiagogonzalez.mercadoesclavodh;
+package com.santiagogonzalez.mercadoesclavodh.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.santiagogonzalez.mercadoesclavodh.R;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -128,7 +129,7 @@ public class RegistroActivity extends AppCompatActivity {
         myButtonRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(RegistroActivity.this,LoginActivity.class);
+                Intent myIntent = new Intent(RegistroActivity.this, LoginActivity.class);
                 startActivity(myIntent);
             }
         });

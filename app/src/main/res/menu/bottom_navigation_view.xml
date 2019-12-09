@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/BottomNavigationView_Item_Home"
+        android:icon="@drawable/home_bottom_navigation_view"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/BottomNavigationView_Item_Favoritos"
+        android:icon="@drawable/favorito_bottom_navigation_view"
+        android:title="@string/favoritos"/>
+
+    <item
+        android:id="@+id/BottomNavigationView_Item_Perfil"
+        android:icon="@drawable/perfil_bottom_navigation_view"
+        android:title="@string/perfil"/>
+</menu>

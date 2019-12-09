@@ -1,15 +1,10 @@
-package com.santiagogonzalez.mercadoesclavodh;
+package com.santiagogonzalez.mercadoesclavodh.view.activity;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,13 +13,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ActionMode;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -37,9 +30,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.santiagogonzalez.mercadoesclavodh.R;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity{
@@ -67,8 +59,6 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        FacebookSdk.sdkInitialize(getApplicationContext());
 
         encuentroComponentesPorId();
 
@@ -120,7 +110,7 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 //Le creo un intent para poder pasar de esta activity a la del RegistroActivity
-                Intent intent = new Intent(LoginActivity.this,RegistroActivity.class);
+                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
                 startActivity(intent);
             }
         });
@@ -207,27 +197,27 @@ public class LoginActivity extends AppCompatActivity{
 
     private void iniciarSesionFirebase() {
         //Obtenemos el email y el password desde las cajas de texto
-        String stringEmail = myTextInputEditTextEmail.getText().toString().trim();
-        String stringPassword = myTextInputEditTextPassword.getText().toString().trim();
+        String myStringEmail = myTextInputEditTextEmail.getText().toString().trim();
+        String myStringPassword = myTextInputEditTextPassword.getText().toString().trim();
 
         //Verificamos que las cajas de texto no esten vacias
-        if (TextUtils.isEmpty(stringEmail)) {
+        if (TextUtils.isEmpty(myStringEmail)) {
             Toast.makeText(this, "Se debe ingresar un Email", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(stringPassword)) {
+        if (TextUtils.isEmpty(myStringPassword)) {
             Toast.makeText(this, "Se debe ingresar un Password", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        myFirebaseAuth.signInWithEmailAndPassword(stringEmail, stringPassword)
+        myFirebaseAuth.signInWithEmailAndPassword(myStringEmail, myStringPassword)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            FirebaseUser user = myFirebaseAuth.getCurrentUser();
-                            updateUI(user);
+                            FirebaseUser myFirebaseUser = myFirebaseAuth.getCurrentUser();
+                            updateUI(myFirebaseUser);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(LoginActivity.this, "Fallo Logueo.",
