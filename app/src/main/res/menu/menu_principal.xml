@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/MenuPrincipal_Item_Home"
-        android:title="@string/home"/>
+        android:title="@string/home" />
     <item
         android:id="@+id/MenuPrincipal_Item_Perfil"
-        android:title="@string/perfil"/>
+        android:title="@string/perfil" />
     <item
         android:id="@+id/MenuPrincipal_Item_AboutUs"
         android:title="@string/about_us" />

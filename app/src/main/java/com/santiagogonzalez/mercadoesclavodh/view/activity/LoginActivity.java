@@ -34,7 +34,7 @@ import com.santiagogonzalez.mercadoesclavodh.R;
 
 import java.util.Arrays;
 
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
 
 
     private TextInputLayout myTextInputLayoutEmail;
@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity{
 
     }
 
-    private void encuentroComponentesPorId(){
+    private void encuentroComponentesPorId() {
 
         myTextInputLayoutEmail = findViewById(R.id.LoginActivity_TextInputLayout_Email);
         myTextInputEditTextEmail = findViewById(R.id.LoginActivity_TextInputEditText_Email);
@@ -89,13 +89,13 @@ public class LoginActivity extends AppCompatActivity{
         myTextViewIngresarSinRegistrarse = findViewById(R.id.LoginActivity_TextView_IngresarSinRegistrarse);
     }
 
-    private void configuroLogInFacebook(){
+    private void configuroLogInFacebook() {
         myCallbackManager = CallbackManager.Factory.create();
         myLoginButtonFacebook.setReadPermissions(Arrays.asList("email"));
     }
 
 
-    private void configuroBotones(){
+    private void configuroBotones() {
 
         myButtonInciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,10 +147,10 @@ public class LoginActivity extends AppCompatActivity{
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             FirebaseUser myFirebaseUser = myFirebaseAuth.getCurrentUser();
                             updateUI(myFirebaseUser);
-                        }else{
+                        } else {
                             Toast.makeText(LoginActivity.this, "No se pudo registrar con firebase", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -159,17 +159,17 @@ public class LoginActivity extends AppCompatActivity{
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        myCallbackManager.onActivityResult(requestCode,resultCode,data);
+        myCallbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void goMainScreen(){
+    private void goMainScreen() {
         Intent myIntent = new Intent(this, MainActivity.class);
         myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(myIntent);
     }
 
-    private void configuroLosInputEditText(){
+    private void configuroLosInputEditText() {
 
         myTextInputEditTextPassword.addTextChangedListener(new TextWatcher() {
             @Override
@@ -179,10 +179,10 @@ public class LoginActivity extends AppCompatActivity{
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                if (charSequence.length() < 6){
+                if (charSequence.length() < 6) {
                     //le seteo el mensaj de error al text imput layout
                     myTextInputLayoutPassword.setError("Tiene que tener minimo 6 caracteres");
-                }else {
+                } else {
                     //le borro el mensaje de error cuando el contenido este bien
                     myTextInputLayoutPassword.setError(null);
                 }

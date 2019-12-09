@@ -69,7 +69,7 @@ public class RegistroActivity extends AppCompatActivity {
         configuroBotones();
     }
 
-    private void encontrarComponentesPorId(){
+    private void encontrarComponentesPorId() {
 
         myTextInputLayoutEmail = findViewById(R.id.LoginActivity_TextInputLayout_Email);
         myTextInputEditTextEmail = findViewById(R.id.RegistroActivity_TextInputEditText_Email);
@@ -94,7 +94,7 @@ public class RegistroActivity extends AppCompatActivity {
         myButtonRegresar = findViewById(R.id.RegistroActivity_Button_Regresar);
     }
 
-    private void configuroBotones(){
+    private void configuroBotones() {
 
         myButtonRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,19 +107,19 @@ public class RegistroActivity extends AppCompatActivity {
                 myStringNacionalidad = myTextInputEditTextNacionalidad.getText().toString();
 
                 boolean losCamposEstanCompletos = !myStringEmail.isEmpty() &&
-                                                !myStringPassword.isEmpty() &&
-                                                !myStringNombre.isEmpty() &&
-                                                !myStringEdad.isEmpty() &&
-                                                !myStringApellido.isEmpty() &&
-                                                !myStringNacionalidad.isEmpty();
-                if(losCamposEstanCompletos){
+                        !myStringPassword.isEmpty() &&
+                        !myStringNombre.isEmpty() &&
+                        !myStringEdad.isEmpty() &&
+                        !myStringApellido.isEmpty() &&
+                        !myStringNacionalidad.isEmpty();
+                if (losCamposEstanCompletos) {
 
-                    if(myStringPassword.length() >= 6){
+                    if (myStringPassword.length() >= 6) {
                         registrarUsuario();
-                    }else{
+                    } else {
                         Toast.makeText(RegistroActivity.this, "El password debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
                     }
-                }else{
+                } else {
                     Toast.makeText(RegistroActivity.this, "Debe completar los campos", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -135,11 +135,11 @@ public class RegistroActivity extends AppCompatActivity {
         });
     }
 
-    private void registrarUsuario(){
+    private void registrarUsuario() {
         myFirebaseAuth.createUserWithEmailAndPassword(myStringEmail, myStringPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
 
                     String stringId = myFirebaseAuth.getCurrentUser().getUid();
 
@@ -154,17 +154,17 @@ public class RegistroActivity extends AppCompatActivity {
                     myDatabaseReference.child("Usuarios").child(stringId).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task2) {
-                            if(task2.isSuccessful()){
+                            if (task2.isSuccessful()) {
                                 Toast.makeText(RegistroActivity.this, "Se a registrado el usuario correctamente", Toast.LENGTH_SHORT).show();
-                                Intent myIntent = new Intent(RegistroActivity.this,LoginActivity.class);
+                                Intent myIntent = new Intent(RegistroActivity.this, LoginActivity.class);
                                 startActivity(myIntent);
                                 finish();
-                            }else{
+                            } else {
                                 Toast.makeText(RegistroActivity.this, "No se pudieron crear los datos correctamente", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
-                }else{
+                } else {
                     Toast.makeText(RegistroActivity.this, "No se pudo registrar", Toast.LENGTH_SHORT).show();
                 }
             }

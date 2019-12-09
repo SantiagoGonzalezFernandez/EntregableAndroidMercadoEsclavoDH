@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.FavoritosFragment"
-    android:background="@color/colorDestacado">
+    android:background="@color/colorDestacado"
+    tools:context=".view.fragment.FavoritosFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

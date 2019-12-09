@@ -9,10 +9,10 @@
     <item
         android:id="@+id/BottomNavigationView_Item_Favoritos"
         android:icon="@drawable/favorito_bottom_navigation_view"
-        android:title="@string/favoritos"/>
+        android:title="@string/favoritos" />
 
     <item
         android:id="@+id/BottomNavigationView_Item_Perfil"
         android:icon="@drawable/perfil_bottom_navigation_view"
-        android:title="@string/perfil"/>
+        android:title="@string/perfil" />
 </menu>

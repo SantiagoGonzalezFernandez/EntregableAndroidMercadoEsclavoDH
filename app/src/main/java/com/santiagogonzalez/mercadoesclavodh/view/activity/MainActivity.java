@@ -20,10 +20,15 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.santiagogonzalez.mercadoesclavodh.R;
+import com.santiagogonzalez.mercadoesclavodh.controller.ControllerProducto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
+import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.AboutUsFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.FavoritosFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.HomeFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.PerfilFragment;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,12 +44,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private BottomNavigationView myBottomNavigationView;
 
+    private ControllerProducto myControllerProducto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         myFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        myControllerProducto = new ControllerProducto();
 
         encuentroComponentesPorId();
 
@@ -62,14 +71,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myBottomNavigationView = findViewById(R.id.MainActivity_BottomNavigationView);
     }
 
-    private void configuroBottomNavigationView(){
+    private void configuroBottomNavigationView() {
         myBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 Fragment myFragmentSelecionado = null;
 
-                switch(menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.BottomNavigationView_Item_Home:
                         myFragmentSelecionado = new HomeFragment();
                         break;
@@ -88,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void pegarPrimerFragment(Fragment fragment){
+    private void pegarPrimerFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.MainActivity_FrameLayout_ContenedorDeFragments, fragment)
@@ -182,18 +191,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-
         mySearchView = (SearchView) myMenuItemSearch.getActionView();
         mySearchView.setQueryHint("Que buscas?");
 
-        /*
         mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                controllerPelicula.traerPeliculasPorBusqueda(query, new ResultListener<List<Pelicula>>() {
+                myControllerProducto.traerProductoPorBusqueda(query, new ResultListener<List<Producto>>() {
                     @Override
-                    public void finish(List<Pelicula> result) {
-                        adapterPelicula.setPeliculaList(result);
+                    public void finish(List<Producto> result) {
+                     //   adapterProducto.setProductoList(result);
                     }
                 });
 
@@ -202,12 +209,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                myArrayAdapterString.getFilter().filter(newText);
                 return true;
             }
         });
-        */
 
         return true;
     }
+
+
 }

@@ -50,6 +50,17 @@ dependencies {
 
     //Material Design
     implementation 'com.google.android.material:material:1.0.0'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+
+    //Gson Retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+
+    //Logging Interceptor
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+
 }
 
 //Esto es para configurar Firebase
