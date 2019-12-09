@@ -21,4 +21,8 @@
 
     <string name="open_drawer">Open Drawer</string>
     <string name="close_drawer">Close Drawer</string>
+
+    <string name="facebook_app_id">2552402031659121</string>
+    <string name="fb_login_protocol_scheme">fb2552402031659121</string>
+
 </resources>

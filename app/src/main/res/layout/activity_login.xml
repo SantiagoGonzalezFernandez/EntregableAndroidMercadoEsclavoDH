@@ -77,6 +77,14 @@
             android:textColor="@color/colorTexto" />
 
 
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/LoginActivity_LoginButton_IniciarSesionFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp" />
+
         <TextView
             android:id="@+id/LoginActivity_TextView_IngresarSinRegistrarse"
             android:layout_width="match_parent"

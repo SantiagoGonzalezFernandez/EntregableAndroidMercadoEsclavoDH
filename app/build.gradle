@@ -43,6 +43,10 @@ dependencies {
     //Firebase Auth
     implementation 'com.google.firebase:firebase-auth:19.2.0'
 
+    //Esto es para configurar el Login de Facebook
+    //Facebook Android SDK
+    implementation 'com.facebook.android:facebook-android-sdk:5.0.0'
+
     //Material Design
     implementation 'com.google.android.material:material:1.0.0'
 }

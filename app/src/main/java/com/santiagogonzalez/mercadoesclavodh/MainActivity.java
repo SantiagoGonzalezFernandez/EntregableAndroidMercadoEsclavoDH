@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,8 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FirebaseUser myFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        
         encuentroComponentesPorId();
 
         configuroToolbar();
@@ -83,8 +88,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.MenuPrincipal_Item_CerrarSesion:
                 Toast.makeText(this, "Cerrar sesion", Toast.LENGTH_LONG).show();
                 //Cierro la sesion de firebase y abro el LoginActivity
-                myFirebaseAuth = FirebaseAuth.getInstance();
-                myFirebaseAuth.signOut();
+                FirebaseAuth.getInstance().signOut();
+                LoginManager.getInstance().logOut();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
                 break;
