@@ -23,6 +23,7 @@ import com.santiagogonzalez.mercadoesclavodh.R;
 import com.santiagogonzalez.mercadoesclavodh.controller.ControllerProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
 import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
+import com.santiagogonzalez.mercadoesclavodh.view.adapter.AdapterProducto;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.AboutUsFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.FavoritosFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.HomeFragment;
@@ -30,7 +31,7 @@ import com.santiagogonzalez.mercadoesclavodh.view.fragment.PerfilFragment;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , HomeFragment.ListenerDelFragment,AdapterProducto.ListenerDelAdapter{
 
     private Toolbar myToolbar;
     private DrawerLayout myDrawerLayout;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ControllerProducto myControllerProducto;
 
+    private AdapterProducto myAdapterProducto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         myControllerProducto = new ControllerProducto();
+
+        myAdapterProducto = new AdapterProducto(this);
 
         encuentroComponentesPorId();
 
@@ -197,13 +202,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                pegarFragment(new HomeFragment());
                 myControllerProducto.traerProductoPorBusqueda(query, new ResultListener<List<Producto>>() {
                     @Override
                     public void finish(List<Producto> result) {
-                     //   adapterProducto.setProductoList(result);
+                     myAdapterProducto.setMyProductoList(result);
                     }
                 });
-
                 return false;
             }
 
@@ -217,4 +222,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    @Override
+    public void informarProducto(Producto myProducto) {
+        Toast.makeText(this, myProducto.getMyStringTitulo(), Toast.LENGTH_SHORT).show();
+        /*FragmentDetallePelicula fragment_detallePelicula = new FragmentDetallePelicula();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(fragment_detallePelicula.CLAVE_PELICULA, pelicula);
+        fragment_detallePelicula.setArguments(bundle);
+        currentFragment = fragment_detallePelicula;
+        pegarFragment(fragment_detallePelicula);*/
+    }
+
+    @Override
+    public void recibirProducto(Producto producto) {
+        Toast.makeText(this, producto.getMyStringTitulo(), Toast.LENGTH_SHORT).show();
+        /*FragmentDetallePelicula fragment_detallePelicula = new FragmentDetallePelicula();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(fragment_detallePelicula.CLAVE_PELICULA, pelicula);
+        fragment_detallePelicula.setArguments(bundle);
+        currentFragment = fragment_detallePelicula;
+        pegarFragment(fragment_detallePelicula);*/
+    }
 }
