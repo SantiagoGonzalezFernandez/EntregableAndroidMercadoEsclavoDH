@@ -17,12 +17,14 @@ public class ProductoDAO extends ProductoRetrofitDao {
 
     private static final String BASE_URL = "https://api.mercadolibre.com/";
 
+    public static final String PRODUCTO_SELECCIONADO = "producto";
+
     public ProductoDAO() {
         super(BASE_URL);
     }
 
-    public void traerProductoPorBusqueda(final ResultListener<List<Producto>> myResultListener, String query){
-        Call<ContainerProducto> myCall = myService.traerProductoPorBusqueda(query);
+    public void traerProductoPorBusqueda(String PRODUCTO_SELECCIONADO,final ResultListener<List<Producto>> myResultListener){
+        Call<ContainerProducto> myCall = myService.traerProductoPorBusqueda(PRODUCTO_SELECCIONADO);
 
         myCall.enqueue(new Callback<ContainerProducto>() {
             @Override

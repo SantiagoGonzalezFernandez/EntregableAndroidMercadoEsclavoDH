@@ -15,12 +15,12 @@ public class ControllerProducto {
     }
 
     public void traerProductoPorBusqueda(String query, final ResultListener<List<Producto>> myResultListener){
-        myProductoDAO.traerProductoPorBusqueda(new ResultListener<List<Producto>>(){
-            @Override
-            public void finish(List<Producto> result) {
-                myResultListener.finish(result);
-            }
-        }, query);
+        myProductoDAO.traerProductoPorBusqueda(query, new ResultListener<List<Producto>>(){
+                    @Override
+                    public void finish(List<Producto> result) {
+                        myResultListener.finish(result);
+                    }
+                });
     }
 
 }
