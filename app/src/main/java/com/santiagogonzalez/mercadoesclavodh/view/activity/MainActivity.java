@@ -20,11 +20,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.santiagogonzalez.mercadoesclavodh.R;
-import com.santiagogonzalez.mercadoesclavodh.controller.ControllerProducto;
-import com.santiagogonzalez.mercadoesclavodh.model.data.ProductoDAO;
-import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
-import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
-import com.santiagogonzalez.mercadoesclavodh.view.adapter.AdapterProducto;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.AboutUsFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.FavoritosFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.HomeFragment;
@@ -47,20 +42,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private BottomNavigationView myBottomNavigationView;
 
-    private ControllerProducto myControllerProducto;
-
-    private AdapterProducto myAdapterProducto;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         myFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        myControllerProducto = new ControllerProducto();
-
-        myAdapterProducto = new AdapterProducto(new ArrayList<Producto>());
 
         encuentroComponentesPorId();
 
@@ -204,14 +191,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Bundle myBundle = new Bundle();
+                /*Bundle myBundle = new Bundle();
                 myBundle.putString(ProductoDAO.PRODUCTO_SELECCIONADO,query);
                 myControllerProducto.traerProductoPorBusqueda(query, new ResultListener<List<Producto>>() {
                     @Override
                     public void finish(List<Producto> result) {
                      myAdapterProducto.setProductoList(result);
                     }
-                });
+                });*/
                 return false;
             }
 
