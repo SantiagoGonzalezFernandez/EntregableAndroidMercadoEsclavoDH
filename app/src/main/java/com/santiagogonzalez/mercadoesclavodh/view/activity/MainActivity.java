@@ -30,9 +30,10 @@ import com.santiagogonzalez.mercadoesclavodh.view.fragment.FavoritosFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.HomeFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.PerfilFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener , HomeFragment.ListenerDelFragment,AdapterProducto.ListenerDelAdapter{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar myToolbar;
     private DrawerLayout myDrawerLayout;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         myControllerProducto = new ControllerProducto();
 
-        myAdapterProducto = new AdapterProducto(this);
+        myAdapterProducto = new AdapterProducto(new ArrayList<Producto>());
 
         encuentroComponentesPorId();
 
@@ -208,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 myControllerProducto.traerProductoPorBusqueda(query, new ResultListener<List<Producto>>() {
                     @Override
                     public void finish(List<Producto> result) {
-                     myAdapterProducto.setMyProductoList(result);
+                     myAdapterProducto.setProductoList(result);
                     }
                 });
                 return false;
@@ -221,28 +222,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         return true;
-    }
-
-
-    @Override
-    public void informarProducto(Producto myProducto) {
-        Toast.makeText(this, myProducto.getMyStringTitulo(), Toast.LENGTH_SHORT).show();
-        /*FragmentDetallePelicula fragment_detallePelicula = new FragmentDetallePelicula();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(fragment_detallePelicula.CLAVE_PELICULA, pelicula);
-        fragment_detallePelicula.setArguments(bundle);
-        currentFragment = fragment_detallePelicula;
-        pegarFragment(fragment_detallePelicula);*/
-    }
-
-    @Override
-    public void recibirProducto(Producto producto) {
-        Toast.makeText(this, producto.getMyStringTitulo(), Toast.LENGTH_SHORT).show();
-        /*FragmentDetallePelicula fragment_detallePelicula = new FragmentDetallePelicula();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(fragment_detallePelicula.CLAVE_PELICULA, pelicula);
-        fragment_detallePelicula.setArguments(bundle);
-        currentFragment = fragment_detallePelicula;
-        pegarFragment(fragment_detallePelicula);*/
     }
 }

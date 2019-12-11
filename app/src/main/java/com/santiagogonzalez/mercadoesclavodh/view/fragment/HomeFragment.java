@@ -18,14 +18,15 @@ import com.santiagogonzalez.mercadoesclavodh.controller.ControllerProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
 import com.santiagogonzalez.mercadoesclavodh.view.adapter.AdapterProducto;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements AdapterProducto.ListenerDelAdapter{
+public class HomeFragment extends Fragment{
 
     private RecyclerView myRecyclerViewListaProductos;
-    private ListenerDelFragment myListenerDelFragment;
     private AdapterProducto myAdapterProducto;
     private ControllerProducto myControllerProducto;
 
@@ -49,28 +50,13 @@ public class HomeFragment extends Fragment implements AdapterProducto.ListenerDe
     }
 
     public void inicializarAdapters(){
-        myAdapterProducto = new AdapterProducto(this);
+        myAdapterProducto = new AdapterProducto(new ArrayList<Producto>());
         myControllerProducto = new ControllerProducto();
     }
 
     public void cargarYSetearRecyclers(){
         myRecyclerViewListaProductos.setLayoutManager(new LinearLayoutManager(getContext(), myRecyclerViewListaProductos.HORIZONTAL, false));
         myRecyclerViewListaProductos.setAdapter(myAdapterProducto);
-
+        myRecyclerViewListaProductos.setHasFixedSize(true);
     }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        myListenerDelFragment = (ListenerDelFragment)context;
-    }
-
-    public void informarProducto(Producto producto){
-        myListenerDelFragment.recibirProducto(producto);
-    }
-
-    public interface ListenerDelFragment{
-        public void recibirProducto(Producto producto);
-    }
-
 }
