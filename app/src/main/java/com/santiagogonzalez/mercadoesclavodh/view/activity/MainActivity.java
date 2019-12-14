@@ -55,20 +55,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private RecyclerView myRecyclerViewProductos;
 
-    private List<Producto> listaSinNada;
+    private List<Producto> myListProdutoVacia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        myControllerProducto = new ProductoController();
-
-        myAdapterProducto = new ProductoRVAdapter(this);
-
-        listaSinNada = new ArrayList<>();
+        instanciarComponentes();
 
         encuentroComponentesPorId();
 
@@ -78,6 +72,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         configuroBottomNavigationView();
 
+    }
+
+    private void instanciarComponentes(){
+        myFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        myControllerProducto = new ProductoController();
+
+        myAdapterProducto = new ProductoRVAdapter(this);
+
+        myListProdutoVacia = new ArrayList<>();
     }
 
     private void configuroRecyclerView() {
@@ -107,8 +111,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 switch (menuItem.getItemId()) {
-                    case R.id.BottomNavigationView_Item_Home:
-                        getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_FrameLayout_ContenedorDeFragments)).commit();
+                    case R.id.BottomNavigationView_Item_Buscar:
+                        removerFragments();
                         break;
                     case R.id.BottomNavigationView_Item_Favoritos:
                         pegarFragment(new FavoritosFragment());
@@ -123,13 +127,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
+    private void removerFragments(){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_FrameLayout_ContenedorDeFragments))
+                .commit();
+    }
+
     private void pegarFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.MainActivity_FrameLayout_ContenedorDeFragments, fragment)
                 .addToBackStack(null)
                 .commit();
-        myAdapterProducto.actualizarLista(listaSinNada);
+        myAdapterProducto.actualizarLista(myListProdutoVacia);
     }
 
     private void configuroToolbar() {
@@ -157,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (intItemSeleccionadoId) {
             case R.id.MenuPrincipal_Item_Home:
                 Toast.makeText(this, "Home", Toast.LENGTH_LONG).show();
-                getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_FrameLayout_ContenedorDeFragments)).commit();
+                removerFragments();
                 break;
             case R.id.MenuPrincipal_Item_Perfil:
                 Toast.makeText(this, "Perfil", Toast.LENGTH_LONG).show();
@@ -169,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.MenuPrincipal_Item_CerrarSesion:
                 Toast.makeText(this, "Cerrar sesion", Toast.LENGTH_LONG).show();
-                myAdapterProducto.actualizarLista(listaSinNada);
+                myAdapterProducto.actualizarLista(myListProdutoVacia);
                 //Cierro la sesion de firebase y de facebook y abro el LoginActivity
                 FirebaseAuth.getInstance().signOut();
                 LoginManager.getInstance().logOut();

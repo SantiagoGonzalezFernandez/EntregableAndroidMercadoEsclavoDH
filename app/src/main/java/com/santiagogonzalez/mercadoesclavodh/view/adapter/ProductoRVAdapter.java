@@ -18,78 +18,78 @@ import java.util.List;
 
 public class ProductoRVAdapter extends RecyclerView.Adapter {
 
-    private List<Producto> productoList;
-    private ListenerDelAdapter listenerDelAdapter;
+    private List<Producto> myProductoList;
+    private ListenerDelAdapter myListenerDelAdapter;
 
-    public ProductoRVAdapter(List<Producto> productoList) {
-        this.productoList = productoList;
+    public ProductoRVAdapter(List<Producto> myProductoList) {
+        this.myProductoList = myProductoList;
     }
 
-    public void actualizarLista(List<Producto> productoList) {
-        this.productoList = productoList;
+    public void actualizarLista(List<Producto> myProductoList) {
+        this.myProductoList = myProductoList;
         notifyDataSetChanged();
     }
 
-    public ProductoRVAdapter(ListenerDelAdapter listenerDelAdapter) {
-        productoList = new ArrayList<>();
-        this.listenerDelAdapter = listenerDelAdapter;
+    public ProductoRVAdapter(ListenerDelAdapter myListenerDelAdapter) {
+        myProductoList = new ArrayList<>();
+        this.myListenerDelAdapter = myListenerDelAdapter;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View vistaInflada = LayoutInflater.from(parent.getContext()).inflate(R.layout.celda_producto, parent, false);
-        ProductoViewHolder productoViewHolder = new ProductoViewHolder(vistaInflada);
-        return productoViewHolder;
+        View myView = LayoutInflater.from(parent.getContext()).inflate(R.layout.celda_producto, parent, false);
+        ProductoViewHolder myProductoViewHolder = new ProductoViewHolder(myView);
+        return myProductoViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        Producto producto = productoList.get(position);
-        ProductoViewHolder productoViewHolder = (ProductoViewHolder) holder;
-        productoViewHolder.bindProducto(producto);
+        Producto myProducto = myProductoList.get(position);
+        ProductoViewHolder myProductoViewHolder = (ProductoViewHolder) holder;
+        myProductoViewHolder.bindProducto(myProducto);
     }
 
     @Override
     public int getItemCount() {
-        return productoList.size();
+        return myProductoList.size();
     }
 
     public class ProductoViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView imageView;
-        private TextView textViewProducto;
-        private TextView textViewPrecio;
+        private ImageView myImageViewImagen;
+        private TextView myTextViewTitulo;
+        private TextView myTextViewPrecio;
 
         public ProductoViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.CeldaProducto_ImageView_ImagenDeProducto);
-            textViewProducto = itemView.findViewById(R.id.CeldaProducto_TextView_TituloDeProducto);
-            textViewPrecio = itemView.findViewById(R.id.CeldaProducto_TextView_PrecioDeProducto);
+            myImageViewImagen = itemView.findViewById(R.id.CeldaProducto_ImageView_ImagenDeProducto);
+            myTextViewTitulo = itemView.findViewById(R.id.CeldaProducto_TextView_TituloDeProducto);
+            myTextViewPrecio = itemView.findViewById(R.id.CeldaProducto_TextView_PrecioDeProducto);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Producto producto = productoList.get(getAdapterPosition());
-                    listenerDelAdapter.informarProducto(producto);
+                    Producto myProducto = myProductoList.get(getAdapterPosition());
+                    myListenerDelAdapter.informarProducto(myProducto);
                 }
             });
         }
 
-        public void bindProducto(Producto unProducto) {
+        public void bindProducto(Producto myProducto) {
             Glide
                     .with(itemView)
-                    .load(unProducto.getThumbnail())
-                    .into(imageView);
+                    .load(myProducto.getThumbnail())
+                    .into(myImageViewImagen);
 
-            textViewProducto.setText(unProducto.getTitle());
+            myTextViewTitulo.setText(myProducto.getTitle());
 
-            textViewPrecio.setText("$ " + unProducto.getPrice());
+            myTextViewPrecio.setText("$ " + myProducto.getPrice());
         }
     }
 
     public interface ListenerDelAdapter {
-        public void informarProducto(Producto producto);
+        public void informarProducto(Producto myProducto);
     }
 }
 

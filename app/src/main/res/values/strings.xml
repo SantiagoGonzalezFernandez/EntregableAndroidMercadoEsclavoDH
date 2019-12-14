@@ -32,5 +32,18 @@
     <string name="fragment_home">Fragment Home</string>
     <string name="fragment_perfil">Fragment Perfil</string>
     <string name="about_us_fragment">About Us Fragment</string>
+    <string name="mercado_esclavo">Mercado Esclavo</string>
+    <string name="texto_historia">Mercado Esclavo es una aplicación con una gran historia detrás, ya que este proyecto se inició con casi nada de capital y con un solo programador. El programador casi se queda loco después de terminar la app por tantas horas que le dedico a la misma y tantos problemas que tuvo que resolver. Al terminar el proyecto estas fueron las palabras del programador: ¡Espero que pueda volver a mi vida normal y no terminar en psiquiátrico, sino botellazo!</string>
+    <string name="historia">Historia</string>
+    <string name="mision">Misión</string>
+    <string name="texto_mision">Permitir que las personas desde su casa puedan encontrar el producto que ellos deseen y no se tenga que mover de su hogar.</string>
+    <string name="vision">Visión</string>
+    <string name="texto_vision">Poder llegar a ser la aplicación número 1 nacionalmente.</string>
+    <string name="valores">Valores</string>
+    <string name="texto_valores">Practicar el trato respetuoso \n Comunicación clara y honesta \n Responsabilidad laboral \n Competitividad e innovación \n Evaluación autocrítica \n Integridad laboral \n Constancia y disciplina</string>
+    <string name="buscar">Buscar</string>
+    <string name="texto_sobre_mi">Hola, Me llamo Santiago González Fernández y soy el programador de esta aplicación.\n Tengo 17 años, me encanta y me interesa todo lo relacionado a la tecnología.\n El proceso de esta app fue una total experiencia en mi vida ya que siendo tan joven nunca tuve que estar con tantas obligaciones, esto me hizo madurar gigantescamente y ahora valoro mucho más mi tiempo y el tiempo de los demás.\n Si me preguntan si volvería elegir a pasar por todas esas presiones de vuelta le diría sin dudarlo que si ya que me hizo crecer intelectualmente, espiritualmente y emocionalmente.</string>
+    <string name="contacto">Contacto</string>
+    <string name="texto_contacto">Gmail: SantiagoGonzalezFernandezPro@Gmail.com \n  Linkedin: Santiago Gonzalez Fernandez  \n GitHub: Santiago Gonzalez Fernandez  \n Celular: +54 9 11 4163 9183</string>
 
 </resources>
