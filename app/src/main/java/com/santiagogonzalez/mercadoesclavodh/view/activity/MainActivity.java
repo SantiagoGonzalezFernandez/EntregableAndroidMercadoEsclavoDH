@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,15 +23,19 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.santiagogonzalez.mercadoesclavodh.R;
+import com.santiagogonzalez.mercadoesclavodh.controller.ProductoController;
+import com.santiagogonzalez.mercadoesclavodh.model.Producto;
+import com.santiagogonzalez.mercadoesclavodh.model.ProductoDao;
+import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
+import com.santiagogonzalez.mercadoesclavodh.view.adapter.ProductoRVAdapter;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.AboutUsFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.FavoritosFragment;
-import com.santiagogonzalez.mercadoesclavodh.view.fragment.HomeFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.PerfilFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ProductoRVAdapter.ListenerDelAdapter {
 
     private Toolbar myToolbar;
     private DrawerLayout myDrawerLayout;
@@ -42,6 +49,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private BottomNavigationView myBottomNavigationView;
 
+    private ProductoController myControllerProducto;
+
+    private ProductoRVAdapter myAdapterProducto;
+
+    private RecyclerView myRecyclerViewProductos;
+
+    private List<Producto> listaSinNada;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +64,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         myFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        myControllerProducto = new ProductoController();
+
+        myAdapterProducto = new ProductoRVAdapter(this);
+
+        listaSinNada = new ArrayList<>();
+
         encuentroComponentesPorId();
+
+        configuroRecyclerView();
 
         configuroToolbar();
 
         configuroBottomNavigationView();
 
-        pegarPrimerFragment(new HomeFragment());
+    }
+
+    private void configuroRecyclerView() {
+
+        LinearLayoutManager myLinearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+
+        DividerItemDecoration myDividerItemDecoration = new DividerItemDecoration(myRecyclerViewProductos.getContext(),
+                myLinearLayoutManager.getOrientation());
+
+        myRecyclerViewProductos.addItemDecoration(myDividerItemDecoration);
+        myRecyclerViewProductos.setLayoutManager(myLinearLayoutManager);
+        myRecyclerViewProductos.setAdapter(myAdapterProducto);
+        myRecyclerViewProductos.setHasFixedSize(true);
     }
 
     private void encuentroComponentesPorId() {
@@ -63,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myDrawerLayout = findViewById(R.id.MainActivity_DrawerLayout_Contenedor);
         myNavigationView = findViewById(R.id.MainActivity_NavigationView);
         myBottomNavigationView = findViewById(R.id.MainActivity_BottomNavigationView);
+        myRecyclerViewProductos = findViewById(R.id.MainActivity_RecyclerView_ListaProductos);
     }
 
     private void configuroBottomNavigationView() {
@@ -70,48 +106,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-                Fragment myFragmentSelecionado = null;
-
                 switch (menuItem.getItemId()) {
                     case R.id.BottomNavigationView_Item_Home:
-                        myFragmentSelecionado = new HomeFragment();
+                        getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_FrameLayout_ContenedorDeFragments)).commit();
                         break;
                     case R.id.BottomNavigationView_Item_Favoritos:
-                        myFragmentSelecionado = new FavoritosFragment();
+                        pegarFragment(new FavoritosFragment());
                         break;
                     case R.id.BottomNavigationView_Item_Perfil:
-                        myFragmentSelecionado = new PerfilFragment();
+                        pegarFragment(new PerfilFragment());
                         break;
                 }
-
-                pegarFragment(myFragmentSelecionado);
 
                 return true;
             }
         });
     }
 
-    private void pegarPrimerFragment(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.MainActivity_FrameLayout_ContenedorDeFragments, fragment)
-                .commit();
-    }
-
-    private void remplazarFragment(Fragment fragment) {
+    private void pegarFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.MainActivity_FrameLayout_ContenedorDeFragments, fragment)
                 .addToBackStack(null)
                 .commit();
-    }
-
-    private void pegarFragment(Fragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.MainActivity_FrameLayout_ContenedorDeFragments, fragment)
-                .addToBackStack(null)
-                .commit();
+        myAdapterProducto.actualizarLista(listaSinNada);
     }
 
     private void configuroToolbar() {
@@ -139,18 +157,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (intItemSeleccionadoId) {
             case R.id.MenuPrincipal_Item_Home:
                 Toast.makeText(this, "Home", Toast.LENGTH_LONG).show();
-                remplazarFragment(new HomeFragment());
+                getSupportFragmentManager().beginTransaction().remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_FrameLayout_ContenedorDeFragments)).commit();
                 break;
             case R.id.MenuPrincipal_Item_Perfil:
                 Toast.makeText(this, "Perfil", Toast.LENGTH_LONG).show();
-                remplazarFragment(new PerfilFragment());
+                pegarFragment(new PerfilFragment());
                 break;
             case R.id.MenuPrincipal_Item_AboutUs:
                 Toast.makeText(this, "About Us", Toast.LENGTH_LONG).show();
-                remplazarFragment(new AboutUsFragment());
+                pegarFragment(new AboutUsFragment());
                 break;
             case R.id.MenuPrincipal_Item_CerrarSesion:
                 Toast.makeText(this, "Cerrar sesion", Toast.LENGTH_LONG).show();
+                myAdapterProducto.actualizarLista(listaSinNada);
                 //Cierro la sesion de firebase y de facebook y abro el LoginActivity
                 FirebaseAuth.getInstance().signOut();
                 LoginManager.getInstance().logOut();
@@ -191,14 +210,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                /*Bundle myBundle = new Bundle();
-                myBundle.putString(ProductoDAO.PRODUCTO_SELECCIONADO,query);
+                Bundle myBundle = new Bundle();
+                myBundle.putString(ProductoDao.PRODUCTO_SELECCIONADO, query);
                 myControllerProducto.traerProductoPorBusqueda(query, new ResultListener<List<Producto>>() {
                     @Override
                     public void finish(List<Producto> result) {
-                     myAdapterProducto.setProductoList(result);
+                        myAdapterProducto.actualizarLista(result);
                     }
-                });*/
+                });
                 return false;
             }
 
@@ -209,5 +228,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         return true;
+    }
+
+    @Override
+    public void informarProducto(Producto producto) {
+
     }
 }
