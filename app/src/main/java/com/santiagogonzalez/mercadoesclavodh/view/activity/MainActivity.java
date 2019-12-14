@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void encuentroComponentesPorId() {
         myToolbar = findViewById(R.id.MainActivity_Include_Toolbar);
-        myDrawerLayout = findViewById(R.id.MainActivity_DrawerLayout_Contenedor);
+        myDrawerLayout = findViewById(R.id.MainActivity_DrawerLayout_ContenedorDeFragments);
         myNavigationView = findViewById(R.id.MainActivity_NavigationView);
         myBottomNavigationView = findViewById(R.id.MainActivity_BottomNavigationView);
         myRecyclerViewProductos = findViewById(R.id.MainActivity_RecyclerView_ListaProductos);
@@ -130,14 +130,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void removerFragments() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_FrameLayout_ContenedorDeFragments))
+                .remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_DrawerLayout_ContenedorDeFragments))
                 .commit();
     }
 
     private void pegarFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.MainActivity_FrameLayout_ContenedorDeFragments, fragment)
+                .replace(R.id.MainActivity_DrawerLayout_ContenedorDeFragments, fragment)
                 .addToBackStack(null)
                 .commit();
         myAdapterProducto.actualizarLista(myListProdutoVacia);
