@@ -10,7 +10,6 @@
     <string name="registrarse">Registrarse</string>
     <string name="regresar">Regresar</string>
     <string name="nombre">Nombre</string>
-    <string name="edad">Edad</string>
     <string name="sexo">Sexo</string>
     <string name="nacionalidad">Nacionalidad</string>
     <string name="apellido">Apellido</string>
@@ -45,5 +44,10 @@
     <string name="texto_sobre_mi">Hola, Me llamo Santiago González Fernández y soy el programador de esta aplicación.\n Tengo 17 años, me encanta y me interesa todo lo relacionado a la tecnología.\n El proceso de esta app fue una total experiencia en mi vida ya que siendo tan joven nunca tuve que estar con tantas obligaciones, esto me hizo madurar gigantescamente y ahora valoro mucho más mi tiempo y el tiempo de los demás.\n Si me preguntan si volvería elegir a pasar por todas esas presiones de vuelta le diría sin dudarlo que si ya que me hizo crecer intelectualmente, espiritualmente y emocionalmente.</string>
     <string name="contacto">Contacto</string>
     <string name="texto_contacto">Gmail: SantiagoGonzalezFernandezPro@Gmail.com \n  Linkedin: Santiago Gonzalez Fernandez  \n GitHub: Santiago Gonzalez Fernandez  \n Celular: +54 9 11 4163 9183</string>
+    <string name="nombre_perfil">Nombre:</string>
+    <string name="apellido_perfil">Apellido:</string>
+    <string name="edad">Edad</string>
+    <string name="email_pefil">Email:</string>
+
 
 </resources>

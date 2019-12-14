@@ -11,35 +11,35 @@
         android:id="@+id/MainActivity_Include_Toolbar"
         layout="@layout/toolbar_de_la_app" />
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/MainActivity_DrawerLayout_Contenedor"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?actionBarSize"
-        android:layout_marginBottom="?actionBarSize">
-
-        <FrameLayout
-            android:id="@+id/MainActivity_FrameLayout_ContenedorDeFragments"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/MainActivity_RecyclerView_ListaProductos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/MainActivity_NavigationView"
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/MainActivity_DrawerLayout_Contenedor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/colorFondo"
-            app:itemTextColor="@color/colorTexto"
-            app:menu="@menu/menu_principal">
+            android:layout_marginTop="?actionBarSize"
+            android:layout_marginBottom="?actionBarSize">
 
-        </com.google.android.material.navigation.NavigationView>
+            <FrameLayout
+                android:id="@+id/MainActivity_FrameLayout_ContenedorDeFragments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/MainActivity_RecyclerView_ListaProductos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/MainActivity_NavigationView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="@color/colorFondo"
+                app:itemTextColor="@color/colorTexto"
+                app:menu="@menu/menu_principal">
+
+            </com.google.android.material.navigation.NavigationView>
+
+        </androidx.drawerlayout.widget.DrawerLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/MainActivity_BottomNavigationView"

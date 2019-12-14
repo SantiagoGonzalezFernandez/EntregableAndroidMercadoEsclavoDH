@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void instanciarComponentes(){
+    private void instanciarComponentes() {
         myFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         myControllerProducto = new ProductoController();
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void removerFragments(){
+    private void removerFragments() {
         getSupportFragmentManager()
                 .beginTransaction()
                 .remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_FrameLayout_ContenedorDeFragments))

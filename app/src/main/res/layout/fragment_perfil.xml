@@ -1,15 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/com_facebook_button_login_background_color"
+    android:background="@color/colorFondo"
     tools:context=".view.fragment.PerfilFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/fragment_perfil" />
+        android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/FragmentPerfil_TextView_Titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Perfil"
+            android:textColor="@color/colorTexto"
+            android:textSize="30sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/FragmentPerfil_TextView_Titulo"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="2.5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/FragmentPerfil_TextView_NombreSubTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nombre_perfil"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/FragmentPerfil_TextView_Nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_toRightOf="@id/FragmentPerfil_TextView_NombreSubTitulo"
+                    android:textSize="20sp"
+                    tools:text="Santiago" />
+
+                <TextView
+                    android:id="@+id/FragmentPerfil_TextView_ApellidoSubTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/FragmentPerfil_TextView_NombreSubTitulo"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/apellido_perfil"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/FragmentPerfil_TextView_Apellido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/FragmentPerfil_TextView_NombreSubTitulo"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/FragmentPerfil_TextView_ApellidoSubTitulo"
+                    android:textSize="20sp"
+                    tools:text="Gonzalez Fernandez" />
+
+                <TextView
+                    android:id="@+id/FragmentPerfil_TextView_EdadSubTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/FragmentPerfil_TextView_ApellidoSubTitulo"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/edad"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/FragmentPerfil_TextView_Edad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/FragmentPerfil_TextView_ApellidoSubTitulo"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/FragmentPerfil_TextView_EdadSubTitulo"
+                    android:textSize="20sp"
+                    tools:text="17" />
+
+                <TextView
+                    android:id="@+id/FragmentPerfil_TextView_NacionalidadSubTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/FragmentPerfil_TextView_EdadSubTitulo"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/nacionalidad"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/FragmentPerfil_TextView_Nacionalidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/FragmentPerfil_TextView_EdadSubTitulo"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/FragmentPerfil_TextView_NacionalidadSubTitulo"
+                    android:textSize="20sp"
+                    tools:text="Argentino" />
+
+                <TextView
+                    android:id="@+id/FragmentPerfil_TextView_EmailSubTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/FragmentPerfil_TextView_NacionalidadSubTitulo"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/email_pefil"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/FragmentPerfil_TextView_Email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/FragmentPerfil_TextView_NacionalidadSubTitulo"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/FragmentPerfil_TextView_EmailSubTitulo"
+                    android:textSize="20sp"
+                    tools:text="Santiagogonzalezfernandezpro@gmail.com" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </FrameLayout>
