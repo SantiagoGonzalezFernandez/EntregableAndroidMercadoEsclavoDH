@@ -10,6 +10,9 @@
         android:id="@+id/MenuPrincipal_Item_AboutUs"
         android:title="@string/about_us" />
     <item
+        android:id="@+id/MenuPrincipal_Item_SobreElDesarrollador"
+        android:title="@string/sobre_el_desarrollador" />
+    <item
         android:id="@+id/MenuPrincipal_Item_CerrarSesion"
         android:title="@string/cerrar_sesion" />
 

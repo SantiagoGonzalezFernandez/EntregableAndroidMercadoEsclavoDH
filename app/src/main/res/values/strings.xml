@@ -48,6 +48,7 @@
     <string name="apellido_perfil">Apellido:</string>
     <string name="edad">Edad</string>
     <string name="email_pefil">Email:</string>
+    <string name="sobre_el_desarrollador">Sobre El Desarrollador</string>
 
 
 </resources>

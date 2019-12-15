@@ -31,6 +31,7 @@ import com.santiagogonzalez.mercadoesclavodh.view.adapter.ProductoRVAdapter;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.AboutUsFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.FavoritosFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.PerfilFragment;
+import com.santiagogonzalez.mercadoesclavodh.view.fragment.SobreDesarrolladorFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void encuentroComponentesPorId() {
         myToolbar = findViewById(R.id.MainActivity_Include_Toolbar);
-        myDrawerLayout = findViewById(R.id.MainActivity_DrawerLayout_ContenedorDeFragments);
+        myDrawerLayout = findViewById(R.id.MainActivity_DrawerLayout_Contenedor);
         myNavigationView = findViewById(R.id.MainActivity_NavigationView);
         myBottomNavigationView = findViewById(R.id.MainActivity_BottomNavigationView);
         myRecyclerViewProductos = findViewById(R.id.MainActivity_RecyclerView_ListaProductos);
@@ -130,14 +131,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void removerFragments() {
         getSupportFragmentManager()
                 .beginTransaction()
-                .remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_DrawerLayout_ContenedorDeFragments))
+                .remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_FrameLayout_ContenedorDeFragment))
                 .commit();
     }
 
     private void pegarFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.MainActivity_DrawerLayout_ContenedorDeFragments, fragment)
+                .replace(R.id.MainActivity_FrameLayout_ContenedorDeFragment, fragment)
                 .addToBackStack(null)
                 .commit();
         myAdapterProducto.actualizarLista(myListProdutoVacia);
@@ -177,6 +178,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.MenuPrincipal_Item_AboutUs:
                 Toast.makeText(this, "About Us", Toast.LENGTH_LONG).show();
                 pegarFragment(new AboutUsFragment());
+                break;
+            case R.id.MenuPrincipal_Item_SobreElDesarrollador:
+                Toast.makeText(this, "Sobre El Desarrollador", Toast.LENGTH_LONG).show();
+                pegarFragment(new SobreDesarrolladorFragment());
                 break;
             case R.id.MenuPrincipal_Item_CerrarSesion:
                 Toast.makeText(this, "Cerrar sesion", Toast.LENGTH_LONG).show();

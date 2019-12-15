@@ -12,16 +12,16 @@
         layout="@layout/toolbar_de_la_app" />
 
         <androidx.drawerlayout.widget.DrawerLayout
-            android:id="@+id/MainActivity_DrawerLayout_ContenedorDeFragments"
+            android:id="@+id/MainActivity_DrawerLayout_Contenedor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?actionBarSize"
             android:layout_marginBottom="?actionBarSize">
 
-            <!--<FrameLayout
-                android:id="@+id/MainActivity_FrameLayout_ContenedorDeFragments"
+            <FrameLayout
+                android:id="@+id/MainActivity_FrameLayout_ContenedorDeFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />-->
+                android:layout_height="match_parent"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/MainActivity_RecyclerView_ListaProductos"
