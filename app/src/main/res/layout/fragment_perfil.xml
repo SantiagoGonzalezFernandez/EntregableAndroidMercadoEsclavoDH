@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/FragmentPerfil_TextView_ApellidoSubTitulo"
                     android:layout_marginTop="10dp"
-                    android:text="@string/edad"
+                    android:text="@string/edad_perfil"
                     android:textSize="20sp" />
 
                 <TextView
@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/FragmentPerfil_TextView_EdadSubTitulo"
                     android:layout_marginTop="10dp"
-                    android:text="@string/nacionalidad"
+                    android:text="@string/nacionalidad_perfil"
                     android:textSize="20sp" />
 
                 <TextView

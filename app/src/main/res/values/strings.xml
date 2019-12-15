@@ -49,6 +49,8 @@
     <string name="edad">Edad</string>
     <string name="email_pefil">Email:</string>
     <string name="sobre_el_desarrollador">Sobre El Desarrollador</string>
+    <string name="nacionalidad_perfil">Nacionalidad:</string>
+    <string name="edad_perfil">Edad:</string>
 
 
 </resources>

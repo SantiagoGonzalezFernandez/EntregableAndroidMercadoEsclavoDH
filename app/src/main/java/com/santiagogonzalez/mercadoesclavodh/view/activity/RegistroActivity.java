@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -17,7 +19,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.santiagogonzalez.mercadoesclavodh.R;
+import com.santiagogonzalez.mercadoesclavodh.model.Usuario;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,7 +59,6 @@ public class RegistroActivity extends AppCompatActivity {
     private String myStringNacionalidad = "";
 
     private FirebaseAuth myFirebaseAuth;
-    private DatabaseReference myDatabaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +66,6 @@ public class RegistroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
 
         myFirebaseAuth = FirebaseAuth.getInstance();
-        myDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
         encontrarComponentesPorId();
 
@@ -135,7 +138,7 @@ public class RegistroActivity extends AppCompatActivity {
         });
     }
 
-    private void registrarUsuario() {
+    /*private void registrarUsuario() {
         myFirebaseAuth.createUserWithEmailAndPassword(myStringEmail, myStringPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -164,6 +167,40 @@ public class RegistroActivity extends AppCompatActivity {
                             }
                         }
                     });
+                } else {
+                    Toast.makeText(RegistroActivity.this, "No se pudo registrar", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }*/
+
+    private void registrarUsuario() {
+
+        myFirebaseAuth.createUserWithEmailAndPassword(myStringEmail, myStringPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                    Usuario myUsuario = new Usuario(myStringNombre, myStringApellido, myStringEdad, myStringEmail, myStringNacionalidad, myStringPassword);
+
+                    db.collection("usuarios")
+                            .add(myUsuario)
+                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                    Toast.makeText(RegistroActivity.this, "Se a registrado el usuario correctamente", Toast.LENGTH_SHORT).show();
+                                    Intent myIntent = new Intent(RegistroActivity.this, LoginActivity.class);
+                                    startActivity(myIntent);
+                                    finish();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(RegistroActivity.this, "No se pudieron crear los datos correctamente", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                 } else {
                     Toast.makeText(RegistroActivity.this, "No se pudo registrar", Toast.LENGTH_SHORT).show();
                 }

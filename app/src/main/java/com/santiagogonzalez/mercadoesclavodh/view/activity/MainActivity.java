@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         configuroToolbar();
 
         configuroBottomNavigationView();
-
     }
 
     private void instanciarComponentes() {
