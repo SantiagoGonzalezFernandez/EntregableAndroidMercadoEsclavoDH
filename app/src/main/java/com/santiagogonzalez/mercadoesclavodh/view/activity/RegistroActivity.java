@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.santiagogonzalez.mercadoesclavodh.R;
@@ -138,42 +139,6 @@ public class RegistroActivity extends AppCompatActivity {
         });
     }
 
-    /*private void registrarUsuario() {
-        myFirebaseAuth.createUserWithEmailAndPassword(myStringEmail, myStringPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-
-                    String stringId = myFirebaseAuth.getCurrentUser().getUid();
-
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("email", myStringEmail);
-                    map.put("password", myStringPassword);
-                    map.put("nombre", myStringNombre);
-                    map.put("apellido", myStringApellido);
-                    map.put("edad", myStringEdad);
-                    map.put("nacionalidad", myStringNacionalidad);
-
-                    myDatabaseReference.child("Usuarios").child(stringId).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task2) {
-                            if (task2.isSuccessful()) {
-                                Toast.makeText(RegistroActivity.this, "Se a registrado el usuario correctamente", Toast.LENGTH_SHORT).show();
-                                Intent myIntent = new Intent(RegistroActivity.this, LoginActivity.class);
-                                startActivity(myIntent);
-                                finish();
-                            } else {
-                                Toast.makeText(RegistroActivity.this, "No se pudieron crear los datos correctamente", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                } else {
-                    Toast.makeText(RegistroActivity.this, "No se pudo registrar", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }*/
-
     private void registrarUsuario() {
 
         myFirebaseAuth.createUserWithEmailAndPassword(myStringEmail, myStringPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -181,26 +146,17 @@ public class RegistroActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+                    CollectionReference myCollectionReference = db.collection("usuarios");
                     Usuario myUsuario = new Usuario(myStringNombre, myStringApellido, myStringEdad, myStringEmail, myStringNacionalidad, myStringPassword);
-
-                    db.collection("usuarios")
-                            .add(myUsuario)
-                            .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    Toast.makeText(RegistroActivity.this, "Se a registrado el usuario correctamente", Toast.LENGTH_SHORT).show();
-                                    Intent myIntent = new Intent(RegistroActivity.this, LoginActivity.class);
-                                    startActivity(myIntent);
-                                    finish();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(RegistroActivity.this, "No se pudieron crear los datos correctamente", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                    myCollectionReference.document(myUsuario.getEmail()).set(myUsuario).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(RegistroActivity.this, "Se a registrado el usuario correctamente", Toast.LENGTH_SHORT).show();
+                            Intent myIntent = new Intent(RegistroActivity.this, LoginActivity.class);
+                            startActivity(myIntent);
+                            finish();
+                        }
+                    });
                 } else {
                     Toast.makeText(RegistroActivity.this, "No se pudo registrar", Toast.LENGTH_SHORT).show();
                 }

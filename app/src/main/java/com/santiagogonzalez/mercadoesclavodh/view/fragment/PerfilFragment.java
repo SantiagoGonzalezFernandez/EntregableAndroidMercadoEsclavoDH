@@ -10,12 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.model.Document;
 import com.santiagogonzalez.mercadoesclavodh.R;
 import com.santiagogonzalez.mercadoesclavodh.model.Usuario;
 
@@ -33,6 +37,8 @@ public class PerfilFragment extends Fragment {
 
     private FirebaseFirestore myFirebaseFirestore;
     private Usuario myUsuario;
+    private FirebaseAuth myFirebaseAuth;
+    DocumentReference myDocumentReference;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,28 +50,32 @@ public class PerfilFragment extends Fragment {
 
         inicializarComponentes();
 
-        myFirebaseFirestore.collection("usuarios")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        myDocumentReference = myFirebaseFirestore.collection("usuarios").document(myFirebaseAuth.getCurrentUser().getEmail());
+
+        myDocumentReference.get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            QuerySnapshot myQuerySnapshot = task.getResult();
-                            for(DocumentSnapshot myDocumentSnapshot : myQuerySnapshot.getDocuments()){
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot myDocumentSnapshot = task.getResult();
+                            if (myDocumentSnapshot.exists()){
                                 myUsuario = myDocumentSnapshot.toObject(Usuario.class);
+
+                                myTextViewNombre.setText(myUsuario.getNombre());
+                                myTextViewApellido.setText(myUsuario.getApellido());
+                                myTextViewEdad.setText(myUsuario.getEdad());
+                                myTextViewEmail.setText(myUsuario.getEmail());
+                                myTextViewNacionalidad.setText(myUsuario.getNacionalidad());
+                            }else{
+                                Toast.makeText(getContext(), "No existen los datos", Toast.LENGTH_SHORT).show();
                             }
-                            myTextViewNombre.setText(myUsuario.getNombre());
-                            myTextViewApellido.setText(myUsuario.getApellido());
-                            myTextViewEdad.setText(myUsuario.getEdad());
-                            myTextViewEmail.setText(myUsuario.getEmail());
-                            myTextViewNacionalidad.setText(myUsuario.getNacionalidad());
                         }
                     }
                 });
         return view;
     }
 
-    private void encontrarComponentesPorId(View view){
+    private void encontrarComponentesPorId(View view) {
         myTextViewNombre = view.findViewById(R.id.FragmentPerfil_TextView_Nombre);
         myTextViewApellido = view.findViewById(R.id.FragmentPerfil_TextView_Apellido);
         myTextViewEdad = view.findViewById(R.id.FragmentPerfil_TextView_Edad);
@@ -73,9 +83,9 @@ public class PerfilFragment extends Fragment {
         myTextViewEmail = view.findViewById(R.id.FragmentPerfil_TextView_Email);
     }
 
-    private void inicializarComponentes(){
+    private void inicializarComponentes() {
         myFirebaseFirestore = FirebaseFirestore.getInstance();
-        myUsuario = new Usuario();
+        myFirebaseAuth = FirebaseAuth.getInstance();
     }
 
 }
