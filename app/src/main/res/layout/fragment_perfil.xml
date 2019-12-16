@@ -127,7 +127,6 @@
                     android:layout_toRightOf="@id/FragmentPerfil_TextView_EmailSubTitulo"
                     android:textSize="20sp"
                     tools:text="Santiagogonzalezfernandezpro@gmail.com" />
-
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>

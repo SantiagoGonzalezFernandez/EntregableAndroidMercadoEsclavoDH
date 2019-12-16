@@ -9,11 +9,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.Profile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FacebookAuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -38,7 +42,8 @@ public class PerfilFragment extends Fragment {
     private FirebaseFirestore myFirebaseFirestore;
     private Usuario myUsuario;
     private FirebaseAuth myFirebaseAuth;
-    DocumentReference myDocumentReference;
+    private DocumentReference myDocumentReference;
+    private Profile myProfile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,28 +55,35 @@ public class PerfilFragment extends Fragment {
 
         inicializarComponentes();
 
-        myDocumentReference = myFirebaseFirestore.collection("usuarios").document(myFirebaseAuth.getCurrentUser().getEmail());
+        if(myFirebaseAuth.getCurrentUser() != null){
+            myDocumentReference = myFirebaseFirestore.collection("usuarios").document(myFirebaseAuth.getCurrentUser().getEmail());
 
-        myDocumentReference.get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot myDocumentSnapshot = task.getResult();
-                            if (myDocumentSnapshot.exists()){
-                                myUsuario = myDocumentSnapshot.toObject(Usuario.class);
+            myDocumentReference.get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot myDocumentSnapshot = task.getResult();
+                                myTextViewNombre.setText(myProfile.getFirstName());
+                                myTextViewApellido.setText(myProfile.getLastName());
+                                if (myDocumentSnapshot.exists()){
+                                    myUsuario = myDocumentSnapshot.toObject(Usuario.class);
 
-                                myTextViewNombre.setText(myUsuario.getNombre());
-                                myTextViewApellido.setText(myUsuario.getApellido());
-                                myTextViewEdad.setText(myUsuario.getEdad());
-                                myTextViewEmail.setText(myUsuario.getEmail());
-                                myTextViewNacionalidad.setText(myUsuario.getNacionalidad());
-                            }else{
-                                Toast.makeText(getContext(), "No existen los datos", Toast.LENGTH_SHORT).show();
+                                    myTextViewNombre.setText(myUsuario.getNombre());
+                                    myTextViewApellido.setText(myUsuario.getApellido());
+                                    myTextViewEdad.setText(myUsuario.getEdad());
+                                    myTextViewEmail.setText(myUsuario.getEmail());
+                                    myTextViewNacionalidad.setText(myUsuario.getNacionalidad());
+                                }else{
+                                    Toast.makeText(getContext(), "Si quieres un perfil mas completo registrate usando nuestra app", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
-                    }
-                });
+                    });
+        }else{
+            Toast.makeText(getContext(), "Tenes que registrarte!", Toast.LENGTH_SHORT).show();
+        }
+
         return view;
     }
 
@@ -86,6 +98,7 @@ public class PerfilFragment extends Fragment {
     private void inicializarComponentes() {
         myFirebaseFirestore = FirebaseFirestore.getInstance();
         myFirebaseAuth = FirebaseAuth.getInstance();
+        myProfile = Profile.getCurrentProfile();
     }
 
 }
