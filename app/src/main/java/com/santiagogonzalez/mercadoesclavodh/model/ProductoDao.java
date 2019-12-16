@@ -16,29 +16,29 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProductoDao {
 
 
-    private ProductoService productoService;
-    private Retrofit retrofit;
+    private ProductoService myProductoService;
+    private Retrofit myRetrofit;
     public static final String BASE_URL = "https://api.mercadolibre.com/sites/MLA/";
 
     public static final String PRODUCTO_SELECCIONADO = "producto_seleccionado";
 
     public ProductoDao() {
-        Retrofit retrofit = new Retrofit.Builder()
+        Retrofit myRetrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        productoService = retrofit.create(ProductoService.class);
+        myProductoService = myRetrofit.create(ProductoService.class);
     }
 
-    public void obtenerResultadoDao(String PRODUCTO_SELECCIONADO,final ResultListener<ProductoContainer> escuchadorDelControler){
-        Call<ProductoContainer> callProductos = productoService.getCallService(PRODUCTO_SELECCIONADO);
+    public void obtenerResultadoDao(String PRODUCTO_SELECCIONADO,final ResultListener<ProductoContainer> myEscuchadorDelControler){
+        Call<ProductoContainer> myCallProductos = myProductoService.getCallService(PRODUCTO_SELECCIONADO);
 
-        callProductos.enqueue(new Callback<ProductoContainer>() {
+        myCallProductos.enqueue(new Callback<ProductoContainer>() {
             @Override
             public void onResponse(Call<ProductoContainer> call, Response<ProductoContainer> response) {
-                ProductoContainer productoContainerDeInternet = response.body();
-                escuchadorDelControler.finish(productoContainerDeInternet);
+                ProductoContainer myProductoContainer = response.body();
+                myEscuchadorDelControler.finish(myProductoContainer);
             }
 
             @Override
@@ -49,9 +49,9 @@ public class ProductoDao {
     }
 
     public void traerProductoPorBusqueda(final ResultListener<List<Producto>> resultListenerController, String movieBusqueda){
-        Call<ProductoContainer> call = productoService.getCallService(movieBusqueda);
+        Call<ProductoContainer> myCall = myProductoService.getCallService(movieBusqueda);
 
-        call.enqueue(new Callback<ProductoContainer>() {
+        myCall.enqueue(new Callback<ProductoContainer>() {
             @Override
             public void onResponse(Call<ProductoContainer> call, Response<ProductoContainer> response) {
                 ProductoContainer myProductoContainer = response.body();

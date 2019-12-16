@@ -64,8 +64,10 @@ public class PerfilFragment extends Fragment {
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot myDocumentSnapshot = task.getResult();
-                                myTextViewNombre.setText(myProfile.getFirstName());
-                                myTextViewApellido.setText(myProfile.getLastName());
+                                if(myProfile != null){
+                                    myTextViewNombre.setText(myProfile.getFirstName());
+                                    myTextViewApellido.setText(myProfile.getLastName());
+                                }
                                 if (myDocumentSnapshot.exists()){
                                     myUsuario = myDocumentSnapshot.toObject(Usuario.class);
 
