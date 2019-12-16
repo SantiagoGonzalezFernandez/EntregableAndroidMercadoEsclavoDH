@@ -31,7 +31,6 @@ public class DetalleProductoActivity extends AppCompatActivity {
 
     private ImageView myImageViewImagenDelProducto;
     private TextView myTextViewTituloDelProducto;
-    private TextView myTextViewUsoDelProducto;
     private TextView myTextViewPrecioDelProducto;
     private TextView myTextViewDescripcionDelProducto;
 
@@ -89,7 +88,6 @@ public class DetalleProductoActivity extends AppCompatActivity {
 
         myImageViewImagenDelProducto = findViewById(R.id.DetalleProductoActivity_ImageView_ImagenDelProducto);
         myTextViewTituloDelProducto = findViewById(R.id.DetalleProductoActivity_TextView_TituloDelProducto);
-        myTextViewUsoDelProducto = findViewById(R.id.DetalleProductoActivity_TextView_UsoDelProducto);
         myTextViewPrecioDelProducto = findViewById(R.id.DetalleProductoActivity_TextView_PrecioDelProducto);
         myTextViewDescripcionDelProducto = findViewById(R.id.DetalleProductoActivity_TextView_DescripcionDelProducto);
     }
