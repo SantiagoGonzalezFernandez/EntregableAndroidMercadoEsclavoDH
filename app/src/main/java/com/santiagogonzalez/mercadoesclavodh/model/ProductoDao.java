@@ -18,7 +18,7 @@ public class ProductoDao {
 
     private ProductoService myProductoService;
     private Retrofit myRetrofit;
-    public static final String BASE_URL = "https://api.mercadolibre.com/sites/MLA/";
+    public static final String BASE_URL = "https://api.mercadolibre.com/";
 
     public static final String PRODUCTO_SELECCIONADO = "producto_seleccionado";
 
@@ -61,6 +61,23 @@ public class ProductoDao {
             @Override
             public void onFailure(Call<ProductoContainer> call, Throwable t) {
                 Log.d("Error","En el traer producto por busqueda");
+            }
+        });
+    }
+
+    public void traerDescripcionPorId(final ResultListener<DescripcioDeProducto> resultListener, String idProducto){
+        Call<List<DescripcioDeProducto>> myCall = myProductoService.getDescripcionProducto(idProducto);
+
+        myCall.enqueue(new Callback<List<DescripcioDeProducto>>() {
+            @Override
+            public void onResponse(Call<List<DescripcioDeProducto>> call, Response<List<DescripcioDeProducto>> response) {
+                DescripcioDeProducto myDescripcioDeProducto = response.body().get(0);
+                resultListener.finish(myDescripcioDeProducto);
+            }
+
+            @Override
+            public void onFailure(Call<List<DescripcioDeProducto>> call, Throwable t) {
+                Log.d("Error","En el traer descripcion de producto por id");
             }
         });
     }

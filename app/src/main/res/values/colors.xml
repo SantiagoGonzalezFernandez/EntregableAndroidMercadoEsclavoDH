@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorFondo">#F4F5FA</color>
-    <color name="colorFondoCeldaProducto">#FFFFFF</color>
+    <color name="colorFondoCeldaProducto">#FFDECC</color>
     <color name="colorFondoBottomNavigationView">#FFFFFF</color>
     <color name="colorTexto">#000000</color>
     <color name="colorDestacado">#FA6900</color>

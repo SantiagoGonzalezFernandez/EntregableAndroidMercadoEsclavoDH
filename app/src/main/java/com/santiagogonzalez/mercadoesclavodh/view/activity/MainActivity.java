@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private List<Producto> myListProdutoVacia;
 
+    private Fragment myFragmentActual;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,10 +130,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void removerFragments() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_FrameLayout_ContenedorDeFragment))
-                .commit();
+        if (myFragmentActual != null){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_FrameLayout_ContenedorDeFragment))
+                    .commit();
+        }
     }
 
     private void pegarFragment(Fragment fragment) {
@@ -140,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .replace(R.id.MainActivity_FrameLayout_ContenedorDeFragment, fragment)
                 .addToBackStack(null)
                 .commit();
+        myFragmentActual = fragment;
         myAdapterProducto.actualizarLista(myListProdutoVacia);
     }
 
@@ -247,6 +252,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void informarProducto(Producto producto) {
-
+        //Creamos el intent para poder cambiar de activity
+        Intent myIntent = new Intent(MainActivity.this, DetalleProductoActivity.class);
+        //Luego creamos el bundle para poder llevar informacion dentro
+        Bundle myBundle = new Bundle();
+        //Le ponemos la key y el user
+        myBundle.putSerializable(DetalleProductoActivity.KEY_PRODUCTO, producto);
+        //Le agregamos al Intent el bundle
+        myIntent.putExtras(myBundle);
+        //Iniciamos la activity
+        startActivity(myIntent);
     }
 }

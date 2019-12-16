@@ -25,12 +25,14 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/FragmentPerfil_TextView_Titulo"
             android:layout_margin="16dp"
-            app:cardCornerRadius="3.5dp">
+            app:cardCornerRadius="3.5dp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:background="@color/colorFondoCeldaProducto">
 
                 <TextView
                     android:id="@+id/FragmentPerfil_TextView_NombreSubTitulo"

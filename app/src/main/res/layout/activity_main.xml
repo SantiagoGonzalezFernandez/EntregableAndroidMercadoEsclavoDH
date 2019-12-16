@@ -26,7 +26,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/MainActivity_RecyclerView_ListaProductos"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                />
 
             <com.google.android.material.navigation.NavigationView
                 android:id="@+id/MainActivity_NavigationView"
