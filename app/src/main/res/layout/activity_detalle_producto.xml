@@ -24,7 +24,7 @@
                 android:id="@+id/DetalleProductoActivity_ImageView_ImagenDelProducto"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:src="@drawable/foto_personal" />
+                tools:src="@drawable/foto_personal" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -39,15 +39,6 @@
                     android:textColor="@color/colorTexto"
                     android:textSize="30sp"
                     tools:text="VolksWagen Polo Classic 1.6" />
-
-                <TextView
-                    android:id="@+id/DetalleProductoActivity_TextView_UsoDelProducto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/colorTexto"
-                    android:textSize="20sp"
-                    tools:text="Nuevo" />
 
                 <TextView
                     android:id="@+id/DetalleProductoActivity_TextView_PrecioDelProducto"
