@@ -5,6 +5,7 @@ import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Paging;
 import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductoContainer implements Serializable {
@@ -29,6 +30,7 @@ public class ProductoContainer implements Serializable {
     }
 
     public ProductoContainer() {
+        myProductoListResultado = new ArrayList<>();
     }
 
     public List<Producto> getMyProductoListResultado() {

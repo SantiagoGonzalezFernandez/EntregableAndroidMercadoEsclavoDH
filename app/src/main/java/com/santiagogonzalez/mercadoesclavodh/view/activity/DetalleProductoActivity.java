@@ -168,9 +168,9 @@ public class DetalleProductoActivity extends AppCompatActivity {
                 if (myMenuItem.getItemId() == R.id.ToolBarDetalleMenu_Item_favorito) {
                     Toast.makeText(getApplicationContext(), "Favorito", Toast.LENGTH_SHORT).show();
                     myBooleanEsFavorita = myProductoContainer.contieneElProducto(myProducto);
+                    actualizarFav(myMenuItemFavorito);
                     myFirestoreController.agregarProductoAFav(myProducto);
                     myBooleanEsFavorita = !myBooleanEsFavorita;
-                    actualizarFav(myMenuItemFavorito);
                 }
                 return true;
             }

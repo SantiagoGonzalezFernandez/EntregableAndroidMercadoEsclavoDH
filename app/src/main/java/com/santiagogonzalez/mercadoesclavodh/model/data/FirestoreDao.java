@@ -38,14 +38,15 @@ public class FirestoreDao {
 
     public void agregarProductoAFav(Producto myProducto){
         //le pregunto si el producto que quiero agregar ya se encuentra en favs
-        if (myProductoContainer.contieneElProducto(myProducto)){
-            //si esta la saco
-            myProductoContainer.removerProducto(myProducto);
-        }
-        else {
-            //si no esta la agrego
-            myProductoContainer.agregarProducto(myProducto);
-        }
+            if (myProductoContainer.contieneElProducto(myProducto)){
+                //si esta la saco
+                myProductoContainer.removerProducto(myProducto);
+            }
+            else {
+                //si no esta la agrego
+                myProductoContainer.agregarProducto(myProducto);
+            }
+
         //updateo la lista en firebase
         myFirebaseFirestore.collection("productos_favoritos")
                 .document(myFirebaseUser.getEmail())
