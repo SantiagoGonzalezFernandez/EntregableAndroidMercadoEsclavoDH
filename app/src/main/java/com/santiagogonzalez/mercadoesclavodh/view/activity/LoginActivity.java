@@ -111,16 +111,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Le creo un intent para poder pasar de esta activity a la del RegistroActivity
-                Intent intent = new Intent(LoginActivity.this, RegistroActivity.class);
-                startActivity(intent);
+                Intent myIntent = new Intent(LoginActivity.this, RegistroActivity.class);
+                startActivity(myIntent);
             }
         });
 
         //Boton de Facebook
         LoginManager.getInstance().registerCallback(myCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
-                handleFacebookToken(loginResult.getAccessToken());
+            public void onSuccess(LoginResult myLoginResult) {
+                handleFacebookToken(myLoginResult.getAccessToken());
             }
 
             @Override
@@ -147,8 +147,8 @@ public class LoginActivity extends AppCompatActivity {
         myFirebaseAuth.signInWithCredential(myAuthCredential)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                    public void onComplete(@NonNull Task<AuthResult> myTask) {
+                        if (myTask.isSuccessful()) {
                             FirebaseUser myFirebaseUser = myFirebaseAuth.getCurrentUser();
                             updateUI(myFirebaseUser);
                         } else {
@@ -214,8 +214,8 @@ public class LoginActivity extends AppCompatActivity {
         myFirebaseAuth.signInWithEmailAndPassword(myStringEmail, myStringPassword)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                    public void onComplete(@NonNull Task<AuthResult> myTask) {
+                        if (myTask.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser myFirebaseUser = myFirebaseAuth.getCurrentUser();
                             updateUI(myFirebaseUser);
@@ -231,8 +231,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //Este metodo si tiene un usuario valido va a pasar directamente a la MainActivity
-    private void updateUI(FirebaseUser currentUser) {
-        if (currentUser != null) {
+    private void updateUI(FirebaseUser myCurrentUser) {
+        if (myCurrentUser != null) {
             startActivity(new Intent(this, MainActivity.class));
         }
     }
