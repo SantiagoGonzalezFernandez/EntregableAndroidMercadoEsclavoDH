@@ -111,12 +111,12 @@ public class ProductoRVAdapter extends RecyclerView.Adapter {
         public void bindProducto(Producto myProducto) {
             Glide
                     .with(itemView)
-                    .load(myProducto.getThumbnail())
+                    .load(myProducto.getMyStringImagen())
                     .into(myImageViewImagen);
 
-            myTextViewTitulo.setText(myProducto.getTitle());
+            myTextViewTitulo.setText(myProducto.getMyStringTitulo());
 
-            myTextViewPrecio.setText("$ " + myProducto.getPrice());
+            myTextViewPrecio.setText("$ " + myProducto.getMyStringPrecio());
         }
     }
 

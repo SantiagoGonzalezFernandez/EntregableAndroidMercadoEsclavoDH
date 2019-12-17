@@ -88,7 +88,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
     }
 
     private void traerDescripcionPorId(){
-        myProductoController.traerDescripcionPorId(myProducto.getId(), new ResultListener<DescripcioDeProducto>() {
+        myProductoController.traerDescripcionPorId(myProducto.getMyStringId(), new ResultListener<DescripcioDeProducto>() {
             @Override
             public void finish(DescripcioDeProducto results) {
                 myTextViewDescripcionDelProducto.setText(results.getPlain_text());
@@ -97,7 +97,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
     }
 
     private void traerCaracteristicasPorId(){
-        myProductoController.traerCaracteristicasPorId(myProducto.getId(), new ResultListener<CaracteristicasDelProducto>() {
+        myProductoController.traerCaracteristicasPorId(myProducto.getMyStringId(), new ResultListener<CaracteristicasDelProducto>() {
             @Override
             public void finish(CaracteristicasDelProducto results) {
                 caracteristicasDelProducto = results;
@@ -120,9 +120,9 @@ public class DetalleProductoActivity extends AppCompatActivity {
     }
 
     private void configuroLosComponentesConLosDatosDelProducto(){
-        Glide.with(myImageViewImagenDelProducto.getContext()).load(myProducto.getThumbnail()).into(myImageViewImagenDelProducto);
-        myTextViewTituloDelProducto.setText(myProducto.getTitle());
-        myTextViewPrecioDelProducto.setText("Precio: $" + myProducto.getPrice());
+        Glide.with(myImageViewImagenDelProducto.getContext()).load(myProducto.getMyStringImagen()).into(myImageViewImagenDelProducto);
+        myTextViewTituloDelProducto.setText(myProducto.getMyStringTitulo());
+        myTextViewPrecioDelProducto.setText("Precio: $" + myProducto.getMyStringPrecio());
     }
 
     private void obtengoLosDatosDelIntentYBundle(){

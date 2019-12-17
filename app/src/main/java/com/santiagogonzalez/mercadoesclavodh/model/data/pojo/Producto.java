@@ -1,53 +1,62 @@
 package com.santiagogonzalez.mercadoesclavodh.model.data.pojo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Producto implements Serializable {
 
-    private String id;
-    private String title;
-    private String thumbnail;
-    private String price;
+    @SerializedName("id")
+    private String myStringId;
 
-    public Producto(String id, String title, String thumbnail, String price) {
-        this.id = id;
-        this.title = title;
-        this.thumbnail = thumbnail;
-        this.price = price;
-    }
+    @SerializedName("title")
+    private String myStringTitulo;
+
+    @SerializedName("thumbnail")
+    private String myStringImagen;
+
+    @SerializedName("price")
+    private String myStringPrecio;
 
     public Producto() {
     }
 
-    public String getId() {
-        return id;
+    public Producto(String myStringId, String myStringTitulo, String myStringImagen, String myStringPrecio) {
+        this.myStringId = myStringId;
+        this.myStringTitulo = myStringTitulo;
+        this.myStringImagen = myStringImagen;
+        this.myStringPrecio = myStringPrecio;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getMyStringId() {
+        return myStringId;
     }
 
-    public String getTitle() {
-        return title;
+    public void setMyStringId(String myStringId) {
+        this.myStringId = myStringId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getMyStringTitulo() {
+        return myStringTitulo;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public void setMyStringTitulo(String myStringTitulo) {
+        this.myStringTitulo = myStringTitulo;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public String getMyStringImagen() {
+        return myStringImagen;
     }
 
-    public String getPrice() {
-        return price;
+    public void setMyStringImagen(String myStringImagen) {
+        this.myStringImagen = myStringImagen;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public String getMyStringPrecio() {
+        return myStringPrecio;
+    }
+
+    public void setMyStringPrecio(String myStringPrecio) {
+        this.myStringPrecio = myStringPrecio;
     }
 }
