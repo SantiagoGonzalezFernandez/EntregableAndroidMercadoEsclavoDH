@@ -20,4 +20,15 @@ public class ProductoContainer {
     public void setResults(List<Producto> results) {
         this.results = results;
     }
+
+    public void agregarProducto(Producto myProducto){
+        results.add(myProducto);
+    }
+    public void removerProducto(Producto myProducto){
+        results.remove(myProducto);
+    }
+
+    public Boolean contieneElProducto(Producto myProducto){
+        return results.contains(myProducto);
+    }
 }

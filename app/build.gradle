@@ -44,6 +44,8 @@ dependencies {
     //Firebase FireStore
     implementation 'com.google.firebase:firebase-firestore:21.3.1'
 
+    //Firebase Storage
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
 
     //Esto es para configurar Firebase
     //Firebase Auth

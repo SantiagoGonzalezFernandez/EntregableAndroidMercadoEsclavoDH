@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.santiagogonzalez.mercadoesclavodh.R;
+import com.santiagogonzalez.mercadoesclavodh.controller.FirestoreController;
 import com.santiagogonzalez.mercadoesclavodh.controller.ProductoController;
 import com.santiagogonzalez.mercadoesclavodh.model.DescripcioDeProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.Producto;
@@ -40,7 +41,9 @@ public class DetalleProductoActivity extends AppCompatActivity {
 
     private ProductoController myProductoController;
 
-    private String Plain_Text;
+    private FirestoreController myFirestoreController;
+
+    private Boolean myBooleanEsFavorita;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
     private void inizializoLosComponentes(){
         myProductoController = new ProductoController();
         myDescripcioDeProducto = new DescripcioDeProducto();
+        myFirestoreController = new FirestoreController();
     }
 
     private void configuroLosComponentesConLosDatosDelProducto(){
@@ -103,7 +107,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.toolbar_detalle_menu, menu);
 
         //Encuentro los componentes del menu
-        MenuItem myMenuItemFavorito = menu.findItem(R.id.ToolBarDetalleMenu_Item_favorito);
+        final MenuItem myMenuItemFavorito = menu.findItem(R.id.ToolBarDetalleMenu_Item_favorito);
 
         //Configuro que pasa si se clickea el Favorito
         myMenuItemFavorito.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -111,10 +115,27 @@ public class DetalleProductoActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.ToolBarDetalleMenu_Item_favorito) {
                     Toast.makeText(getApplicationContext(), "Favorito", Toast.LENGTH_SHORT).show();
+                    myFirestoreController.agregarProductoAFav(myProducto);
+                    myBooleanEsFavorita = !myBooleanEsFavorita;
+                    actualizarFav(myMenuItemFavorito);
                 }
                 return true;
             }
         });
         return true;
     }
+
+    private void actualizarFav(MenuItem myMenuItemFavorito){
+        //si es favorita muestra corazon lleno
+        if (myBooleanEsFavorita){
+            myMenuItemFavorito.setIcon(R.drawable.ic_favorite_black_24dp);
+        }
+        else
+        {
+            //sino vacio
+            myMenuItemFavorito.setIcon(R.drawable.ic_favorite_border_black_24dp);
+        }
+    }
+
+
 }
