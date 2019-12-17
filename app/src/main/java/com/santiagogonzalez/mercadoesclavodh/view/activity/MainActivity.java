@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myRecyclerViewProductos.setAdapter(myAdapterProducto);
         myRecyclerViewProductos.setHasFixedSize(true);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mySimpleCallback);
         itemTouchHelper.attachToRecyclerView(myRecyclerViewProductos);
     }
 
@@ -269,17 +269,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(myIntent);
     }
 
-    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
+    ItemTouchHelper.SimpleCallback mySimpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
 
-            int posicionActual = viewHolder.getAdapterPosition();
-            int toPosition = target.getAdapterPosition();
-            List<Producto> productoList = myAdapterProducto.getMyProductoList();
+            int myIntPosicionActual = viewHolder.getAdapterPosition();
+            int myIntParaLaPosicion = target.getAdapterPosition();
+            List<Producto> myProductoList = myAdapterProducto.getMyProductoList(); 
 
-            Collections.swap(productoList,posicionActual,toPosition);
+            Collections.swap(myProductoList,myIntPosicionActual,myIntParaLaPosicion);
 
-            recyclerView.getAdapter().notifyItemMoved(posicionActual,toPosition);
+            recyclerView.getAdapter().notifyItemMoved(myIntPosicionActual,myIntParaLaPosicion);
             return false;
         }
 
