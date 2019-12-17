@@ -84,7 +84,7 @@ public class FirestoreDao {
                 if (myProductoContainer == null){
                     myProductoContainer = new ProductoContainer();
                 }
-                listenerDelController.finish(myProductoContainer.getResults());
+                listenerDelController.finish(myProductoContainer.getMyProductoListResultado());
             }
         })
                 .addOnFailureListener(new OnFailureListener() {
@@ -93,7 +93,7 @@ public class FirestoreDao {
                     public void onFailure(@NonNull Exception e) {
                         myProductoContainer = new ProductoContainer();
                         //ademas de actualizar la lista se lo doy a la vista que lo va a necesitar
-                        listenerDelController.finish(myProductoContainer.getResults());
+                        listenerDelController.finish(myProductoContainer.getMyProductoListResultado());
                     }
                 });
     }

@@ -29,7 +29,7 @@ public class ProductoController {
             myProductoDao.obtenerResultadoDao(myStringQuery,new ResultListener<ProductoContainer>() {
                 @Override
                 public void finish(ProductoContainer results) {
-                    myIntegerTotal = results.getPaging().getTotal();
+                    myIntegerTotal = results.getMyPaging().getTotal();
                     myBooleanHayUnPedidoEnCurso = false;
                     myIntegerOffset = myIntegerOffset + LIMIT;
                     myEscuchadorDeLaVista.finish(results);

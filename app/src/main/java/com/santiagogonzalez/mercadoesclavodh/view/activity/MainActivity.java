@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void finish(ProductoContainer result) {
                     //Despues le seteamos una nueva lista al adapter segun los resultado que vinieron asincronicamente del controller
-                    myAdapterProducto.addProductoList(result.getResults());
+                    myAdapterProducto.addProductoList(result.getMyProductoListResultado());
                     Toast.makeText(MainActivity.this, "Mira, ahora hay mas...", Toast.LENGTH_SHORT).show();
                 }
             });

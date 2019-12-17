@@ -35,13 +35,13 @@ public class ProductoDao {
         myProductoService = myRetrofit.create(ProductoService.class);
     }
 
-    public void obtenerResultadoDao(String query, final ResultListener<ProductoContainer> myEscuchadorDelControler, Integer offset, Integer total){
-        Call<ProductoContainer> myCallProductos = myProductoService.getCallAgregarMasProductos(query,offset,total);
+    public void obtenerResultadoDao(String myStringQuery, final ResultListener<ProductoContainer> myEscuchadorDelControler, Integer myIntegerOffset, Integer myIntegerTotal){
+        Call<ProductoContainer> myCallProductos = myProductoService.getCallAgregarMasProductos(myStringQuery,myIntegerOffset,myIntegerTotal);
 
         myCallProductos.enqueue(new Callback<ProductoContainer>() {
             @Override
-            public void onResponse(Call<ProductoContainer> call, Response<ProductoContainer> response) {
-                ProductoContainer myProductoContainer = response.body();
+            public void onResponse(Call<ProductoContainer> myCall, Response<ProductoContainer> myResponse) {
+                ProductoContainer myProductoContainer = myResponse.body();
                 myEscuchadorDelControler.finish(myProductoContainer);
             }
 
@@ -52,14 +52,14 @@ public class ProductoDao {
         });
     }
 
-    public void traerProductoPorBusqueda(final ResultListener<List<Producto>> resultListenerController, String movieBusqueda){
-        Call<ProductoContainer> myCall = myProductoService.getCallService(movieBusqueda,0);
+    public void traerProductoPorBusqueda(final ResultListener<List<Producto>> resultListenerController, String myStringQuery){
+        Call<ProductoContainer> myCall = myProductoService.getCallService(myStringQuery,0);
 
         myCall.enqueue(new Callback<ProductoContainer>() {
             @Override
-            public void onResponse(Call<ProductoContainer> call, Response<ProductoContainer> response) {
-                ProductoContainer myProductoContainer = response.body();
-                resultListenerController.finish(myProductoContainer.getResults());
+            public void onResponse(Call<ProductoContainer> myCall, Response<ProductoContainer> myResponse) {
+                ProductoContainer myProductoContainer = myResponse.body();
+                resultListenerController.finish(myProductoContainer.getMyProductoListResultado());
             }
 
             @Override
@@ -69,14 +69,14 @@ public class ProductoDao {
         });
     }
 
-    public void traerDescripcionPorId(final ResultListener<DescripcioDeProducto> resultListener, String idProducto){
-        Call<List<DescripcioDeProducto>> myCall = myProductoService.getDescripcionProducto(idProducto);
+    public void traerDescripcionPorId(final ResultListener<DescripcioDeProducto> myResultListener, String myStringIdProducto){
+        Call<List<DescripcioDeProducto>> myCall = myProductoService.getDescripcionProducto(myStringIdProducto);
 
         myCall.enqueue(new Callback<List<DescripcioDeProducto>>() {
             @Override
-            public void onResponse(Call<List<DescripcioDeProducto>> call, Response<List<DescripcioDeProducto>> response) {
-                DescripcioDeProducto myDescripcioDeProducto = response.body().get(0);
-                resultListener.finish(myDescripcioDeProducto);
+            public void onResponse(Call<List<DescripcioDeProducto>> myCall, Response<List<DescripcioDeProducto>> myResponse) {
+                DescripcioDeProducto myDescripcioDeProducto = myResponse.body().get(0);
+                myResultListener.finish(myDescripcioDeProducto);
             }
 
             @Override
@@ -86,14 +86,14 @@ public class ProductoDao {
         });
     }
 
-    public void traerCaracteristicasPorId(final ResultListener<CaracteristicasDelProducto> resultListener, String idProducto){
-        Call<CaracteristicasDelProducto> myCall = myProductoService.getCaracteristicasDelProducto(idProducto);
+    public void traerCaracteristicasPorId(final ResultListener<CaracteristicasDelProducto> myResultListener, String myStringIdProducto){
+        Call<CaracteristicasDelProducto> myCall = myProductoService.getCaracteristicasDelProducto(myStringIdProducto);
 
         myCall.enqueue(new Callback<CaracteristicasDelProducto>() {
             @Override
-            public void onResponse(Call<CaracteristicasDelProducto> call, Response<CaracteristicasDelProducto> response) {
-                CaracteristicasDelProducto myCaracteristicasDelProducto = response.body();
-                resultListener.finish(myCaracteristicasDelProducto);
+            public void onResponse(Call<CaracteristicasDelProducto> myCall, Response<CaracteristicasDelProducto> myResponse) {
+                CaracteristicasDelProducto myCaracteristicasDelProducto = myResponse.body();
+                myResultListener.finish(myCaracteristicasDelProducto);
             }
             @Override
             public void onFailure(Call<CaracteristicasDelProducto> call, Throwable t) {
