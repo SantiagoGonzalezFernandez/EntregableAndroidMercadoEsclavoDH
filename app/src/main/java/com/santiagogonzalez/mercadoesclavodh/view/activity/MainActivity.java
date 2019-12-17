@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Integer ultimoElementoDelRecycler = myLinearLayoutManager.getItemCount(); //Aca encontramos al ultimo elemento del recycler
 
                 //Aca le agregamos la logica de cuando va agregar users
-                if(ultimaPosicionVisible >= ultimoElementoDelRecycler - 5){
+                if (ultimaPosicionVisible >= ultimoElementoDelRecycler - 5) {
                     agregarProductos();
                 }
             }
@@ -199,6 +199,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Home", Toast.LENGTH_LONG).show();
                 removerFragments();
                 break;
+            case R.id.MenuPrincipal_Item_Favoritos:
+                Toast.makeText(this, "Favoritos", Toast.LENGTH_LONG).show();
+                pegarFragment(new FavoritosFragment());
+                break;
             case R.id.MenuPrincipal_Item_Perfil:
                 Toast.makeText(this, "Perfil", Toast.LENGTH_LONG).show();
                 pegarFragment(new PerfilFragment());
@@ -279,9 +283,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Este metodo setea nuevos Productos
     public void agregarProductos() {
-        if(!primeraBusqueda){
+        if (!primeraBusqueda) {
             //Le pedimos al controller que traiga users
-            myControllerProducto.obtenerResultadoController(myAdapterProducto.getItemCount(), productoBuscado,new ResultListener<ProductoContainer>() {
+            myControllerProducto.obtenerResultadoController(myAdapterProducto.getItemCount(), productoBuscado, new ResultListener<ProductoContainer>() {
                 @Override
                 public void finish(ProductoContainer result) {
                     //Despues le seteamos una nueva lista al adapter segun los resultado que vinieron asincronicamente del controller

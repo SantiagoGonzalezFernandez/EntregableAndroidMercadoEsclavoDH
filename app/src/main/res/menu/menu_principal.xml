@@ -4,6 +4,9 @@
         android:id="@+id/MenuPrincipal_Item_Home"
         android:title="@string/home" />
     <item
+        android:id="@+id/MenuPrincipal_Item_Favoritos"
+        android:title="@string/favoritos" />
+    <item
         android:id="@+id/MenuPrincipal_Item_Perfil"
         android:title="@string/perfil" />
     <item
