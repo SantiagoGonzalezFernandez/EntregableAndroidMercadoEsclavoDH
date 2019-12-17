@@ -1,5 +1,8 @@
 package com.santiagogonzalez.mercadoesclavodh.model;
 
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Paging;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
+
 import java.util.List;
 
 public class ProductoContainer {

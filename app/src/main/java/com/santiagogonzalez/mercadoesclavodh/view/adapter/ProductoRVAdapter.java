@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.santiagogonzalez.mercadoesclavodh.R;
-import com.santiagogonzalez.mercadoesclavodh.model.Producto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
 
 import java.util.ArrayList;
 import java.util.List;

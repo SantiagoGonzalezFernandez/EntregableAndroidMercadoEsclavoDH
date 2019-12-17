@@ -1,10 +1,10 @@
 package com.santiagogonzalez.mercadoesclavodh.controller;
 
-import com.santiagogonzalez.mercadoesclavodh.model.CaracteristicasDelProducto;
-import com.santiagogonzalez.mercadoesclavodh.model.DescripcioDeProducto;
-import com.santiagogonzalez.mercadoesclavodh.model.Producto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.CaracteristicasDelProducto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.DescripcioDeProducto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
 import com.santiagogonzalez.mercadoesclavodh.model.ProductoContainer;
-import com.santiagogonzalez.mercadoesclavodh.model.ProductoDao;
+import com.santiagogonzalez.mercadoesclavodh.model.data.ProductoDao;
 import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
 
 import java.util.List;
@@ -14,49 +14,49 @@ public class ProductoController {
     private ProductoDao myProductoDao;
 
     public static final Integer LIMIT = 10;
-    private Integer total;
-    private Integer offset = 0;
-    private Boolean trajoMasPost = true;
-    private  Boolean hayUnPedidoEnCurso = false;
+    private Integer myIntegerTotal;
+    private Integer myIntegerOffset = 0;
+    private Boolean myBooleanTrajoMasPost = true; 
+    private  Boolean myBooleanHayUnPedidoEnCurso = false;
 
     public ProductoController() {
         this.myProductoDao = new ProductoDao();
     }
 
     public void obtenerResultadoController(final Integer myIntegerSizeDeLaLista, String myStringQuery, final ResultListener<ProductoContainer> myEscuchadorDeLaVista){
-        if(!hayUnPedidoEnCurso){
-            hayUnPedidoEnCurso = true;
+        if(!myBooleanHayUnPedidoEnCurso){
+            myBooleanHayUnPedidoEnCurso = true;
             myProductoDao.obtenerResultadoDao(myStringQuery,new ResultListener<ProductoContainer>() {
                 @Override
                 public void finish(ProductoContainer results) {
-                    total = results.getPaging().getTotal();
-                    hayUnPedidoEnCurso = false;
-                    offset = offset + LIMIT;
+                    myIntegerTotal = results.getPaging().getTotal();
+                    myBooleanHayUnPedidoEnCurso = false;
+                    myIntegerOffset = myIntegerOffset + LIMIT;
                     myEscuchadorDeLaVista.finish(results);
-                    if(myIntegerSizeDeLaLista + offset >= total){
-                        trajoMasPost = false;
+                    if(myIntegerSizeDeLaLista + myIntegerOffset >= myIntegerTotal){
+                        myBooleanTrajoMasPost = false;
                     }
                 }
-            }, offset,LIMIT);
+            }, myIntegerOffset,LIMIT);
         }
     }
 
-    public void traerProductoPorBusqueda(String productoBusqueda, final ResultListener<List<Producto>> listenerDeLaVista){
+    public void traerProductoPorBusqueda(String myStringProductoBusqueda, final ResultListener<List<Producto>> myListenerDeLaVista){
         myProductoDao.traerProductoPorBusqueda(new ResultListener<List<Producto>>(){
             @Override
             public void finish(List<Producto> result) {
-                listenerDeLaVista.finish(result);
+                myListenerDeLaVista.finish(result);
             }
-        }, productoBusqueda);
+        }, myStringProductoBusqueda);
     }
 
-    public void traerDescripcionPorId(String idProducto, final ResultListener<DescripcioDeProducto> listResultListener){
+    public void traerDescripcionPorId(String myStringIdProducto, final ResultListener<DescripcioDeProducto> myListResultListener){
         myProductoDao.traerDescripcionPorId(new ResultListener<DescripcioDeProducto>() {
             @Override
             public void finish(DescripcioDeProducto results) {
-                listResultListener.finish(results);
+                myListResultListener.finish(results);
             }
-        }, idProducto);
+        }, myStringIdProducto);
     }
 
     public void traerCaracteristicasPorId(String idProducto, final ResultListener<CaracteristicasDelProducto> listResultListener){

@@ -1,7 +1,7 @@
 package com.santiagogonzalez.mercadoesclavodh.util;
 
-import com.santiagogonzalez.mercadoesclavodh.model.CaracteristicasDelProducto;
-import com.santiagogonzalez.mercadoesclavodh.model.DescripcioDeProducto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.CaracteristicasDelProducto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.DescripcioDeProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.ProductoContainer;
 
 import java.util.List;

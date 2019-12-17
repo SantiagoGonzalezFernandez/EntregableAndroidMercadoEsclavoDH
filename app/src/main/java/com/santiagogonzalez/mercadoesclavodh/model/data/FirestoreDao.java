@@ -1,4 +1,4 @@
-package com.santiagogonzalez.mercadoesclavodh.model;
+package com.santiagogonzalez.mercadoesclavodh.model.data;
 
 import androidx.annotation.NonNull;
 
@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.santiagogonzalez.mercadoesclavodh.model.ProductoContainer;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
 import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.santiagogonzalez.mercadoesclavodh.controller;
 
-import com.santiagogonzalez.mercadoesclavodh.model.FirestoreDao;
-import com.santiagogonzalez.mercadoesclavodh.model.Producto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.FirestoreDao;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
 import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
 
 import java.util.List;
@@ -22,8 +22,8 @@ public class FirestoreController {
     public void traerListaDeFavorito(final ResultListener<List<Producto>> myListenerDeLaVista){
         myFirestoreDao.traerProductosFavoritos(new ResultListener<List<Producto>>() {
             @Override
-            public void finish(List<Producto> result) {
-                myListenerDeLaVista.finish(result);
+            public void finish(List<Producto> myResult) {
+                myListenerDeLaVista.finish(myResult);
             }
         });
     }

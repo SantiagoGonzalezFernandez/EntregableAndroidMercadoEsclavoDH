@@ -1,6 +1,5 @@
 package com.santiagogonzalez.mercadoesclavodh.view.activity;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,13 +18,10 @@ import com.bumptech.glide.Glide;
 import com.santiagogonzalez.mercadoesclavodh.R;
 import com.santiagogonzalez.mercadoesclavodh.controller.FirestoreController;
 import com.santiagogonzalez.mercadoesclavodh.controller.ProductoController;
-import com.santiagogonzalez.mercadoesclavodh.model.CaracteristicasDelProducto;
-import com.santiagogonzalez.mercadoesclavodh.model.DescripcioDeProducto;
-import com.santiagogonzalez.mercadoesclavodh.model.Producto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.CaracteristicasDelProducto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.DescripcioDeProducto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
 import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
-import com.santiagogonzalez.mercadoesclavodh.view.fragment.PerfilFragment;
-
-import java.util.List;
 
 public class DetalleProductoActivity extends AppCompatActivity {
 

@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.santiagogonzalez.mercadoesclavodh.R;
-import com.santiagogonzalez.mercadoesclavodh.model.CaracteristicasDelProducto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.CaracteristicasDelProducto;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 

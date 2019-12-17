@@ -1,7 +1,11 @@
-package com.santiagogonzalez.mercadoesclavodh.model;
+package com.santiagogonzalez.mercadoesclavodh.model.data;
 
 import android.util.Log;
 
+import com.santiagogonzalez.mercadoesclavodh.model.ProductoContainer;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.CaracteristicasDelProducto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.DescripcioDeProducto;
+import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
 import com.santiagogonzalez.mercadoesclavodh.util.ProductoService;
 import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
 
@@ -31,7 +35,7 @@ public class ProductoDao {
         myProductoService = myRetrofit.create(ProductoService.class);
     }
 
-    public void obtenerResultadoDao(String query,final ResultListener<ProductoContainer> myEscuchadorDelControler,Integer offset, Integer total){
+    public void obtenerResultadoDao(String query, final ResultListener<ProductoContainer> myEscuchadorDelControler, Integer offset, Integer total){
         Call<ProductoContainer> myCallProductos = myProductoService.getCallAgregarMasProductos(query,offset,total);
 
         myCallProductos.enqueue(new Callback<ProductoContainer>() {
