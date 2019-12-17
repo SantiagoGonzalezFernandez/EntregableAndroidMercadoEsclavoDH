@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.santiagogonzalez.mercadoesclavodh.R;
 import com.santiagogonzalez.mercadoesclavodh.controller.ProductoController;
 import com.santiagogonzalez.mercadoesclavodh.model.Producto;
+import com.santiagogonzalez.mercadoesclavodh.model.ProductoContainer;
 import com.santiagogonzalez.mercadoesclavodh.model.ProductoDao;
 import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
 import com.santiagogonzalez.mercadoesclavodh.view.adapter.ProductoRVAdapter;
@@ -62,6 +63,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Fragment myFragmentActual;
 
+    private String productoBuscado;
+
+    private Boolean primeraBusqueda = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void configuroRecyclerView() {
 
-        LinearLayoutManager myLinearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        final LinearLayoutManager myLinearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
 
         DividerItemDecoration myDividerItemDecoration = new DividerItemDecoration(myRecyclerViewProductos.getContext(),
                 myLinearLayoutManager.getOrientation());
@@ -102,6 +107,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(mySimpleCallback);
         itemTouchHelper.attachToRecyclerView(myRecyclerViewProductos);
+
+        myRecyclerViewProductos.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                Integer ultimaPosicionVisible = myLinearLayoutManager.findLastVisibleItemPosition(); //Aca encontramos la ultima posicion visible
+                Integer ultimoElementoDelRecycler = myLinearLayoutManager.getItemCount(); //Aca encontramos al ultimo elemento del recycler
+
+                //Aca le agregamos la logica de cuando va agregar users
+                if(ultimaPosicionVisible >= ultimoElementoDelRecycler - 5){
+                    agregarProductos();
+                }
+            }
+        });
     }
 
     private void encuentroComponentesPorId() {
@@ -235,12 +254,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mySearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                productoBuscado = query;
                 Bundle myBundle = new Bundle();
                 myBundle.putString(ProductoDao.PRODUCTO_SELECCIONADO, query);
                 myControllerProducto.traerProductoPorBusqueda(query, new ResultListener<List<Producto>>() {
                     @Override
                     public void finish(List<Producto> result) {
-                        myAdapterProducto.actualizarLista(result);
+                        myAdapterProducto.addProductoList(result);
                     }
                 });
                 return false;
@@ -253,6 +273,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         return true;
+    }
+
+    //Este metodo setea nuevos Productos
+    public void agregarProductos() {
+        if(!primeraBusqueda){
+            //Le pedimos al controller que traiga users
+            myControllerProducto.obtenerResultadoController(myAdapterProducto.getItemCount(), productoBuscado,new ResultListener<ProductoContainer>() {
+                @Override
+                public void finish(ProductoContainer result) {
+                    //Despues le seteamos una nueva lista al adapter segun los resultado que vinieron asincronicamente del controller
+                    myAdapterProducto.addProductoList(result.getResults());
+                    Toast.makeText(MainActivity.this, "Mira, ahora hay mas...", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            myControllerProducto = new ProductoController();
+            myControllerProducto.obtenerResultadoController(myAdapterProducto.getItemCount(), productoBuscado, new ResultListener<ProductoContainer>() {
+                @Override
+                public void finish(ProductoContainer results) {
+                    myAdapterProducto.setMyProductoList(results.getResults());
+                }
+            });
+        }
+
     }
 
     @Override
@@ -277,9 +321,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             int myIntParaLaPosicion = target.getAdapterPosition();
             List<Producto> myProductoList = myAdapterProducto.getMyProductoList();
 
-            Collections.swap(myProductoList,myIntPosicionActual,myIntParaLaPosicion);
+            Collections.swap(myProductoList, myIntPosicionActual, myIntParaLaPosicion);
 
-            recyclerView.getAdapter().notifyItemMoved(myIntPosicionActual,myIntParaLaPosicion);
+            recyclerView.getAdapter().notifyItemMoved(myIntPosicionActual, myIntParaLaPosicion);
             return false;
         }
 

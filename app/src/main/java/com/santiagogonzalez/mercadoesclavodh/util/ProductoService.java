@@ -16,6 +16,11 @@ public interface ProductoService {
     @GET("sites/MLA/search")
     Call<ProductoContainer> getCallService(@Query("q") String productoBuscado);
 
+    @GET("sites/MLA/search")
+    Call<ProductoContainer> getCallAgregarMasProductos(@Query("q") String productoBuscado,
+                                            @Query("offset") Integer offset,
+                                            @Query("limit") Integer limit);
+
     @GET("items/{id}/descriptions")
     Call<List<DescripcioDeProducto>> getDescripcionProducto(@Path("id") String idProducto);
 

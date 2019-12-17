@@ -19,24 +19,52 @@ import java.util.List;
 public class ProductoRVAdapter extends RecyclerView.Adapter {
 
     private List<Producto> myProductoList;
+    private List<Producto> productoListFiltrada;
     private ListenerDelAdapter myListenerDelAdapter;
 
     public ProductoRVAdapter(List<Producto> myProductoList) {
         this.myProductoList = myProductoList;
     }
 
+    public ProductoRVAdapter(ListenerDelAdapter myListenerDelAdapter) {
+        myProductoList = new ArrayList<>();
+        productoListFiltrada = new ArrayList<>();
+        this.myListenerDelAdapter = myListenerDelAdapter;
+    }
+
     public List<Producto> getMyProductoList() {
         return myProductoList;
+    }
+
+    public void setMyProductoList(List<Producto> myProductoList) {
+        this.myProductoList = myProductoList;
+    }
+
+    public void addProductoList(List<Producto> results) {
+        this.myProductoList.addAll(results);
+        notifyDataSetChanged();
+    }
+
+    public List<Producto> getProductoListFiltrada() {
+        return productoListFiltrada;
+    }
+
+    public void setProductoListFiltrada(List<Producto> productoListFiltrada) {
+        this.productoListFiltrada = productoListFiltrada;
+        notifyDataSetChanged();
+    }
+
+    public ListenerDelAdapter getMyListenerDelAdapter() {
+        return myListenerDelAdapter;
+    }
+
+    public void setMyListenerDelAdapter(ListenerDelAdapter myListenerDelAdapter) {
+        this.myListenerDelAdapter = myListenerDelAdapter;
     }
 
     public void actualizarLista(List<Producto> myProductoList) {
         this.myProductoList = myProductoList;
         notifyDataSetChanged();
-    }
-
-    public ProductoRVAdapter(ListenerDelAdapter myListenerDelAdapter) {
-        myProductoList = new ArrayList<>();
-        this.myListenerDelAdapter = myListenerDelAdapter;
     }
 
     @NonNull

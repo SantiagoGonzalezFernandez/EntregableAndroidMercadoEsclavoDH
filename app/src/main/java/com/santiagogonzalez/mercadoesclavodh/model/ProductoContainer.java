@@ -6,6 +6,16 @@ public class ProductoContainer {
 
     List<Producto> results;
 
+    private Paging paging;
+
+    public Paging getPaging() {
+        return paging;
+    }
+
+    public void setPaging(Paging paging) {
+        this.paging = paging;
+    }
+
     public ProductoContainer(List<Producto> results) {
         this.results = results;
     }

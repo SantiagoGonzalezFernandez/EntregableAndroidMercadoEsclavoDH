@@ -13,17 +13,32 @@ public class ProductoController {
 
     private ProductoDao productoDao;
 
+    public static final Integer LIMIT = 10;
+    private Integer total;
+    private Integer offset = 0;
+    private Boolean trajoMasPost = true;
+    private  Boolean hayUnPedidoEnCurso = false;
+
     public ProductoController() {
         this.productoDao = new ProductoDao();
     }
 
-    public void obtenerResultadoController(String productoSeleccionado,final ResultListener<ProductoContainer> escuchadorDeLaVista){
-        productoDao.obtenerResultadoDao(productoSeleccionado,new ResultListener<ProductoContainer>() {
-            @Override
-            public void finish(ProductoContainer results) {
-                escuchadorDeLaVista.finish(results);
-            }
-        });
+    public void obtenerResultadoController(final Integer longituLista, String query, final ResultListener<ProductoContainer> escuchadorDeLaVista){
+        if(!hayUnPedidoEnCurso){
+            hayUnPedidoEnCurso = true;
+            productoDao.obtenerResultadoDao(query,new ResultListener<ProductoContainer>() {
+                @Override
+                public void finish(ProductoContainer results) {
+                    total = results.getPaging().getTotal();
+                    hayUnPedidoEnCurso = false;
+                    offset = offset + LIMIT;
+                    escuchadorDeLaVista.finish(results);
+                    if(longituLista + offset >= total){
+                        trajoMasPost = false;
+                    }
+                }
+            }, offset,LIMIT);
+        }
     }
 
     public void traerProductoPorBusqueda(String productoBusqueda, final ResultListener<List<Producto>> listenerDeLaVista){

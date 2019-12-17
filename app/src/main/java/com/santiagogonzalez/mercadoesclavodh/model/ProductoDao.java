@@ -31,8 +31,8 @@ public class ProductoDao {
         myProductoService = myRetrofit.create(ProductoService.class);
     }
 
-    public void obtenerResultadoDao(String PRODUCTO_SELECCIONADO,final ResultListener<ProductoContainer> myEscuchadorDelControler){
-        Call<ProductoContainer> myCallProductos = myProductoService.getCallService(PRODUCTO_SELECCIONADO);
+    public void obtenerResultadoDao(String query,final ResultListener<ProductoContainer> myEscuchadorDelControler,Integer offset, Integer total){
+        Call<ProductoContainer> myCallProductos = myProductoService.getCallAgregarMasProductos(query,offset,total);
 
         myCallProductos.enqueue(new Callback<ProductoContainer>() {
             @Override
