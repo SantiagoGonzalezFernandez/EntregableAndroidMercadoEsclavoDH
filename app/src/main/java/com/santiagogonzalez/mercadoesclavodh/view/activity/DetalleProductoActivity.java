@@ -91,7 +91,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
         myProductoController.traerDescripcionPorId(myProducto.getMyStringId(), new ResultListener<DescripcioDeProducto>() {
             @Override
             public void finish(DescripcioDeProducto results) {
-                myTextViewDescripcionDelProducto.setText(results.getPlain_text());
+                myTextViewDescripcionDelProducto.setText(results.getMyStringTextoDescripcion());
             }
         });
     }

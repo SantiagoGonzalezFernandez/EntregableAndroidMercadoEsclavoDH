@@ -1,33 +1,38 @@
 package com.santiagogonzalez.mercadoesclavodh.model.data.pojo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class DescripcioDeProducto implements Serializable {
 
-    private String id;
-    private String plain_text;
+    @SerializedName("id")
+    private String myStringId;
+
+    @SerializedName("plain_text")
+    private String myStringTextoDescripcion;
 
     public DescripcioDeProducto() {
     }
 
-    public DescripcioDeProducto(String id, String plain_text) {
-        this.id = id;
-        this.plain_text = plain_text;
+    public DescripcioDeProducto(String myStringId, String myStringTextoDescripcion) {
+        this.myStringId = myStringId;
+        this.myStringTextoDescripcion = myStringTextoDescripcion;
     }
 
-    public String getId() {
-        return id;
+    public String getMyStringId() {
+        return myStringId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setMyStringId(String myStringId) {
+        this.myStringId = myStringId;
     }
 
-    public String getPlain_text() {
-        return plain_text;
+    public String getMyStringTextoDescripcion() {
+        return myStringTextoDescripcion;
     }
 
-    public void setPlain_text(String plain_text) {
-        this.plain_text = plain_text;
+    public void setMyStringTextoDescripcion(String myStringTextoDescripcion) {
+        this.myStringTextoDescripcion = myStringTextoDescripcion;
     }
 }
