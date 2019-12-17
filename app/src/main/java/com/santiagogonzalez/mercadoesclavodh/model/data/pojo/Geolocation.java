@@ -1,33 +1,38 @@
 package com.santiagogonzalez.mercadoesclavodh.model.data.pojo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Geolocation implements Serializable {
 
-    private Double latitude;
-    private Double longitude;
+    @SerializedName("latitude")
+    private Double myDoubleLatitud;
 
-    public Geolocation(Double latitude, Double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
+    @SerializedName("longitude")
+    private Double myDoubleLongitud;
 
     public Geolocation() {
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public Geolocation(Double myDoubleLatitud, Double myDoubleLongitud) {
+        this.myDoubleLatitud = myDoubleLatitud;
+        this.myDoubleLongitud = myDoubleLongitud;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
+    public Double getMyDoubleLatitud() {
+        return myDoubleLatitud;
     }
 
-    public Double getLongitude() {
-        return longitude;
+    public void setMyDoubleLatitud(Double myDoubleLatitud) {
+        this.myDoubleLatitud = myDoubleLatitud;
     }
 
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public Double getMyDoubleLongitud() {
+        return myDoubleLongitud;
+    }
+
+    public void setMyDoubleLongitud(Double myDoubleLongitud) {
+        this.myDoubleLongitud = myDoubleLongitud;
     }
 }

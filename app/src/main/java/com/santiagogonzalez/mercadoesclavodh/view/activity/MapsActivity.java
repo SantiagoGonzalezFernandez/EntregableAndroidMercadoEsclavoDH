@@ -67,7 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         uiSettings.setZoomControlsEnabled(true);
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(caracteristicasDelProducto.getMyGeolocation().getLatitude(), caracteristicasDelProducto.getMyGeolocation().getLongitude());
+        LatLng sydney = new LatLng(caracteristicasDelProducto.getMyGeolocation().getMyDoubleLatitud(), caracteristicasDelProducto.getMyGeolocation().getMyDoubleLongitud());
         mMap.addMarker(new MarkerOptions().position(sydney).title("Vendedor").icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_maps)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }

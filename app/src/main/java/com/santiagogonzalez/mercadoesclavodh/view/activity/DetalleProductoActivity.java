@@ -108,7 +108,6 @@ public class DetalleProductoActivity extends AppCompatActivity {
                 }
                 myTextViewUnidadesDisponiblesDelProducto.setText("Unidades Disponibles: "+results.getAvailable_quantity());
                 myTextViewUnidadesVendidasDelProducto.setText("Unidades Vendidas: "+results.getSold_quantity());
-                Toast.makeText(DetalleProductoActivity.this, results.getMyGeolocation().getLatitude().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
