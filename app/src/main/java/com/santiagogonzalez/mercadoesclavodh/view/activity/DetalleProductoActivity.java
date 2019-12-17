@@ -101,13 +101,13 @@ public class DetalleProductoActivity extends AppCompatActivity {
             @Override
             public void finish(CaracteristicasDelProducto results) {
                 caracteristicasDelProducto = results;
-                if (results.getCondition().equals("new")){
+                if (results.getMyStringCondicion().equals("new")){
                     myTextViewUsoDelProducto.setText("Condicion: Nuevo");
                 }else{
                     myTextViewUsoDelProducto.setText("Condicion: Usado");
                 }
-                myTextViewUnidadesDisponiblesDelProducto.setText("Unidades Disponibles: "+results.getAvailable_quantity());
-                myTextViewUnidadesVendidasDelProducto.setText("Unidades Vendidas: "+results.getSold_quantity());
+                myTextViewUnidadesDisponiblesDelProducto.setText("Unidades Disponibles: "+results.getMyStringCantidadDisponible());
+                myTextViewUnidadesVendidasDelProducto.setText("Unidades Vendidas: "+results.getMyStringCantidadVendida());
             }
         });
     }

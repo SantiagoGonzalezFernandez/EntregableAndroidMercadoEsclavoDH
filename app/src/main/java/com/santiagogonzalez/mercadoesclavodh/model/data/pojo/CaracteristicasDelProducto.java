@@ -6,80 +6,86 @@ import java.io.Serializable;
 
 public class CaracteristicasDelProducto implements Serializable {
 
-    private String id;
+    @SerializedName("id")
+    private String myStringId;
 
-    private String title;
+    @SerializedName("title")
+    private String myStringTitulo;
 
-    private String price;
+    @SerializedName("price")
+    private String myStringPrecio;
 
-    private String available_quantity;
+    @SerializedName("available_quantity")
+    private String myStringCantidadDisponible;
 
-    private String sold_quantity;
+    @SerializedName("sold_quantity")
+    private String myStringCantidadVendida;
 
-    private String condition;
+    @SerializedName("condition")
+    private String myStringCondicion;
 
     @SerializedName("geolocation")
     private Geolocation myGeolocation;
 
-    public CaracteristicasDelProducto(String id, String title, String price, String available_quantity, String sold_quantity, String condition, Geolocation myGeolocation) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-        this.available_quantity = available_quantity;
-        this.sold_quantity = sold_quantity;
-        this.condition = condition;
-        this.myGeolocation = myGeolocation;
-    }
-
     public CaracteristicasDelProducto() {
     }
 
-    public String getId() {
-        return id;
+    public CaracteristicasDelProducto(String myStringId, String myStringTitulo, String myStringPrecio, String myStringCantidadDisponible, String myStringCantidadVendida, String myStringCondicion, Geolocation myGeolocation) {
+        this.myStringId = myStringId;
+        this.myStringTitulo = myStringTitulo;
+        this.myStringPrecio = myStringPrecio;
+        this.myStringCantidadDisponible = myStringCantidadDisponible;
+        this.myStringCantidadVendida = myStringCantidadVendida;
+        this.myStringCondicion = myStringCondicion;
+        this.myGeolocation = myGeolocation;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getMyStringId() {
+        return myStringId;
     }
 
-    public String getTitle() {
-        return title;
+    public void setMyStringId(String myStringId) {
+        this.myStringId = myStringId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getMyStringTitulo() {
+        return myStringTitulo;
     }
 
-    public String getPrice() {
-        return price;
+    public void setMyStringTitulo(String myStringTitulo) {
+        this.myStringTitulo = myStringTitulo;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public String getMyStringPrecio() {
+        return myStringPrecio;
     }
 
-    public String getAvailable_quantity() {
-        return available_quantity;
+    public void setMyStringPrecio(String myStringPrecio) {
+        this.myStringPrecio = myStringPrecio;
     }
 
-    public void setAvailable_quantity(String available_quantity) {
-        this.available_quantity = available_quantity;
+    public String getMyStringCantidadDisponible() {
+        return myStringCantidadDisponible;
     }
 
-    public String getSold_quantity() {
-        return sold_quantity;
+    public void setMyStringCantidadDisponible(String myStringCantidadDisponible) {
+        this.myStringCantidadDisponible = myStringCantidadDisponible;
     }
 
-    public void setSold_quantity(String sold_quantity) {
-        this.sold_quantity = sold_quantity;
+    public String getMyStringCantidadVendida() {
+        return myStringCantidadVendida;
     }
 
-    public String getCondition() {
-        return condition;
+    public void setMyStringCantidadVendida(String myStringCantidadVendida) {
+        this.myStringCantidadVendida = myStringCantidadVendida;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition;
+    public String getMyStringCondicion() {
+        return myStringCondicion;
+    }
+
+    public void setMyStringCondicion(String myStringCondicion) {
+        this.myStringCondicion = myStringCondicion;
     }
 
     public Geolocation getMyGeolocation() {
