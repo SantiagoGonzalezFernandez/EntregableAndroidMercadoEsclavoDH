@@ -12,6 +12,7 @@ import com.santiagogonzalez.mercadoesclavodh.model.ProductoContainer;
 import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
 import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FirestoreDao {
@@ -32,9 +33,8 @@ public class FirestoreDao {
         myFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         //tambien traigo la lista de favoritos del usuario
         traerProductosFavoritos();
+        myProductoContainer = new ProductoContainer(new ArrayList<Producto>());
     }
-
-
 
     public void agregarProductoAFav(Producto myProducto){
         //le pregunto si el producto que quiero agregar ya se encuentra en favs

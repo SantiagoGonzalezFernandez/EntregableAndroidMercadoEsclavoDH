@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.santiagogonzalez.mercadoesclavodh.R;
 import com.santiagogonzalez.mercadoesclavodh.controller.FirestoreController;
 import com.santiagogonzalez.mercadoesclavodh.controller.ProductoController;
+import com.santiagogonzalez.mercadoesclavodh.model.ProductoContainer;
 import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.CaracteristicasDelProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.DescripcioDeProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
@@ -50,6 +51,8 @@ public class DetalleProductoActivity extends AppCompatActivity {
     private Boolean myBooleanEsFavorita;
 
     private CaracteristicasDelProducto myCaracteristicasDelProducto;
+
+    private ProductoContainer myProductoContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +119,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
         myProductoController = new ProductoController();
         myDescripcioDeProducto = new DescripcioDeProducto();
         myFirestoreController = new FirestoreController();
+        myProductoContainer = new ProductoContainer();
     }
 
     private void configuroLosComponentesConLosDatosDelProducto(){
@@ -163,6 +167,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem myMenuItem) {
                 if (myMenuItem.getItemId() == R.id.ToolBarDetalleMenu_Item_favorito) {
                     Toast.makeText(getApplicationContext(), "Favorito", Toast.LENGTH_SHORT).show();
+                    myBooleanEsFavorita = myProductoContainer.contieneElProducto(myProducto);
                     myFirestoreController.agregarProductoAFav(myProducto);
                     myBooleanEsFavorita = !myBooleanEsFavorita;
                     actualizarFav(myMenuItemFavorito);
