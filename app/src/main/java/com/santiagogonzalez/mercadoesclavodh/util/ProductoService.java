@@ -14,7 +14,8 @@ import retrofit2.http.Query;
 public interface ProductoService {
 
     @GET("sites/MLA/search")
-    Call<ProductoContainer> getCallService(@Query("q") String productoBuscado);
+    Call<ProductoContainer> getCallService(@Query("q") String productoBuscado,
+                                           @Query("limit") Integer limit);
 
     @GET("sites/MLA/search")
     Call<ProductoContainer> getCallAgregarMasProductos(@Query("q") String productoBuscado,

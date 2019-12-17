@@ -257,10 +257,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 productoBuscado = query;
                 Bundle myBundle = new Bundle();
                 myBundle.putString(ProductoDao.PRODUCTO_SELECCIONADO, query);
+                myControllerProducto = new ProductoController();
                 myControllerProducto.traerProductoPorBusqueda(query, new ResultListener<List<Producto>>() {
                     @Override
                     public void finish(List<Producto> result) {
-                        myAdapterProducto.addProductoList(result);
+                        myAdapterProducto.setMyProductoList(result);
+                        agregarProductos();
                     }
                 });
                 return false;
@@ -287,16 +289,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Toast.makeText(MainActivity.this, "Mira, ahora hay mas...", Toast.LENGTH_SHORT).show();
                 }
             });
-        }else{
-            myControllerProducto = new ProductoController();
-            myControllerProducto.obtenerResultadoController(myAdapterProducto.getItemCount(), productoBuscado, new ResultListener<ProductoContainer>() {
-                @Override
-                public void finish(ProductoContainer results) {
-                    myAdapterProducto.setMyProductoList(results.getResults());
-                }
-            });
         }
-
     }
 
     @Override

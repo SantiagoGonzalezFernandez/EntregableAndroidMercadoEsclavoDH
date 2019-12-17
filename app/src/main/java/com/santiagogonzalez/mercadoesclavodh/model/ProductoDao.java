@@ -49,7 +49,7 @@ public class ProductoDao {
     }
 
     public void traerProductoPorBusqueda(final ResultListener<List<Producto>> resultListenerController, String movieBusqueda){
-        Call<ProductoContainer> myCall = myProductoService.getCallService(movieBusqueda);
+        Call<ProductoContainer> myCall = myProductoService.getCallService(movieBusqueda,0);
 
         myCall.enqueue(new Callback<ProductoContainer>() {
             @Override
