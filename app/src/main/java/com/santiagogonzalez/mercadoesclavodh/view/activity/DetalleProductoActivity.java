@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.santiagogonzalez.mercadoesclavodh.R;
 import com.santiagogonzalez.mercadoesclavodh.controller.FirestoreController;
 import com.santiagogonzalez.mercadoesclavodh.controller.ProductoController;
+import com.santiagogonzalez.mercadoesclavodh.model.CaracteristicasDelProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.DescripcioDeProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.Producto;
 import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
@@ -27,13 +31,18 @@ import java.util.List;
 public class DetalleProductoActivity extends AppCompatActivity {
 
     public static final String KEY_PRODUCTO = "key_producto";
+    public static final String KEY_CARACTERISTICAS = "key_caracteristicas";
 
     private Toolbar myToolbar;
 
     private ImageView myImageViewImagenDelProducto;
     private TextView myTextViewTituloDelProducto;
+    private TextView myTextViewUsoDelProducto;
     private TextView myTextViewPrecioDelProducto;
+    private TextView myTextViewUnidadesDisponiblesDelProducto;
+    private TextView myTextViewUnidadesVendidasDelProducto;
     private TextView myTextViewDescripcionDelProducto;
+    private Button myButtonUbicacionDelVendedor;
 
     private Producto myProducto;
 
@@ -44,6 +53,8 @@ public class DetalleProductoActivity extends AppCompatActivity {
     private FirestoreController myFirestoreController;
 
     private Boolean myBooleanEsFavorita;
+
+    private CaracteristicasDelProducto caracteristicasDelProducto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +69,53 @@ public class DetalleProductoActivity extends AppCompatActivity {
 
         obtengoLosDatosDelIntentYBundle();
 
-        myProductoController.traerDescripcionPorId(myProducto.getId(), new ResultListener<DescripcioDeProducto>() {
-            @Override
-            public void finish(DescripcioDeProducto results) {
-                 myTextViewDescripcionDelProducto.setText(results.getPlain_text());
-            }
-        });
+        traerDescripcionPorId();
+
+        traerCaracteristicasPorId();
+
+        configuroElBotonUbicacionDelVendedor();
 
         configuroLosComponentesConLosDatosDelProducto();
 
+    }
+
+    private void configuroElBotonUbicacionDelVendedor() {
+        myButtonUbicacionDelVendedor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetalleProductoActivity.this, MapsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(DetalleProductoActivity.KEY_CARACTERISTICAS, caracteristicasDelProducto);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void traerDescripcionPorId(){
+        myProductoController.traerDescripcionPorId(myProducto.getId(), new ResultListener<DescripcioDeProducto>() {
+            @Override
+            public void finish(DescripcioDeProducto results) {
+                myTextViewDescripcionDelProducto.setText(results.getPlain_text());
+            }
+        });
+    }
+
+    private void traerCaracteristicasPorId(){
+        myProductoController.traerCaracteristicasPorId(myProducto.getId(), new ResultListener<CaracteristicasDelProducto>() {
+            @Override
+            public void finish(CaracteristicasDelProducto results) {
+                caracteristicasDelProducto = results;
+                if (results.getCondition().equals("new")){
+                    myTextViewUsoDelProducto.setText("Condicion: Nuevo");
+                }else{
+                    myTextViewUsoDelProducto.setText("Condicion: Usado");
+                }
+                myTextViewUnidadesDisponiblesDelProducto.setText("Unidades Disponibles: "+results.getAvailable_quantity());
+                myTextViewUnidadesVendidasDelProducto.setText("Unidades Vendidas: "+results.getSold_quantity());
+                Toast.makeText(DetalleProductoActivity.this, results.getMyGeolocation().getLatitude().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void inizializoLosComponentes(){
@@ -78,7 +127,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
     private void configuroLosComponentesConLosDatosDelProducto(){
         Glide.with(myImageViewImagenDelProducto.getContext()).load(myProducto.getThumbnail()).into(myImageViewImagenDelProducto);
         myTextViewTituloDelProducto.setText(myProducto.getTitle());
-        myTextViewPrecioDelProducto.setText("$" + myProducto.getPrice());
+        myTextViewPrecioDelProducto.setText("Precio: $" + myProducto.getPrice());
     }
 
     private void obtengoLosDatosDelIntentYBundle(){
@@ -92,8 +141,13 @@ public class DetalleProductoActivity extends AppCompatActivity {
 
         myImageViewImagenDelProducto = findViewById(R.id.DetalleProductoActivity_ImageView_ImagenDelProducto);
         myTextViewTituloDelProducto = findViewById(R.id.DetalleProductoActivity_TextView_TituloDelProducto);
+        myTextViewUsoDelProducto = findViewById(R.id.DetalleProductoActivity_TextView_UsoDelProducto);
         myTextViewPrecioDelProducto = findViewById(R.id.DetalleProductoActivity_TextView_PrecioDelProducto);
+        myTextViewUnidadesDisponiblesDelProducto = findViewById(R.id.DetalleProductoActivity_TextView_UnidadesDisponiblesDelProducto);
+        myTextViewUnidadesVendidasDelProducto = findViewById(R.id.DetalleProductoActivity_TextView_UnidadesVendidasDelProducto);
         myTextViewDescripcionDelProducto = findViewById(R.id.DetalleProductoActivity_TextView_DescripcionDelProducto);
+
+        myButtonUbicacionDelVendedor = findViewById(R.id.DetalleProductoActivity_Button_UbicaionDelVendedor);
     }
 
     private void configuroToolbar() {
@@ -136,6 +190,4 @@ public class DetalleProductoActivity extends AppCompatActivity {
             myMenuItemFavorito.setIcon(R.drawable.ic_favorite_border_black_24dp);
         }
     }
-
-
 }

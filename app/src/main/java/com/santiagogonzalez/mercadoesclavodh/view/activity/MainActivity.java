@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             int myIntPosicionActual = viewHolder.getAdapterPosition();
             int myIntParaLaPosicion = target.getAdapterPosition();
-            List<Producto> myProductoList = myAdapterProducto.getMyProductoList(); 
+            List<Producto> myProductoList = myAdapterProducto.getMyProductoList();
 
             Collections.swap(myProductoList,myIntPosicionActual,myIntParaLaPosicion);
 

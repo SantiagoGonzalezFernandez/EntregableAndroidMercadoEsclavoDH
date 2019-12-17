@@ -81,4 +81,22 @@ public class ProductoDao {
             }
         });
     }
+
+    public void traerCaracteristicasPorId(final ResultListener<CaracteristicasDelProducto> resultListener, String idProducto){
+        Call<CaracteristicasDelProducto> myCall = myProductoService.getCaracteristicasDelProducto(idProducto);
+
+        myCall.enqueue(new Callback<CaracteristicasDelProducto>() {
+            @Override
+            public void onResponse(Call<CaracteristicasDelProducto> call, Response<CaracteristicasDelProducto> response) {
+                CaracteristicasDelProducto myCaracteristicasDelProducto = response.body();
+                resultListener.finish(myCaracteristicasDelProducto);
+            }
+            @Override
+            public void onFailure(Call<CaracteristicasDelProducto> call, Throwable t) {
+                Log.d("Error","En el traer CaracteristicasDelProducto por id");
+            }
+        });
+    }
+
+
 }

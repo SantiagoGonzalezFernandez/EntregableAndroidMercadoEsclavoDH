@@ -41,6 +41,14 @@
                     tools:text="VolksWagen Polo Classic 1.6" />
 
                 <TextView
+                    android:id="@+id/DetalleProductoActivity_TextView_UsoDelProducto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTexto"
+                    android:textSize="20sp"
+                    tools:text="new" />
+
+                <TextView
                     android:id="@+id/DetalleProductoActivity_TextView_PrecioDelProducto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -48,6 +56,24 @@
                     android:textColor="@color/colorTexto"
                     android:textSize="25sp"
                     tools:text="$212375" />
+
+                <TextView
+                    android:id="@+id/DetalleProductoActivity_TextView_UnidadesDisponiblesDelProducto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTexto"
+                    android:layout_marginTop="16dp"
+                    android:textSize="20sp"
+                    tools:text="Unidades Disponibles: 530" />
+
+                <TextView
+                    android:id="@+id/DetalleProductoActivity_TextView_UnidadesVendidasDelProducto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTexto"
+                    android:layout_marginTop="16dp"
+                    android:textSize="20sp"
+                    tools:text="Unidades Vendidas: 56" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -66,6 +92,16 @@
                         android:textColor="@color/colorTexto"
                         android:textSize="20sp" />
                 </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:id="@+id/DetalleProductoActivity_Button_UbicaionDelVendedor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorDestacado"
+                    android:text="@string/ubicacion_del_vendedor"
+                    android:textColor="@color/colorTexto"/>
+
             </LinearLayout>
 
         </LinearLayout>

@@ -51,6 +51,8 @@
     <string name="sobre_el_desarrollador">Sobre El Desarrollador</string>
     <string name="nacionalidad_perfil">Nacionalidad:</string>
     <string name="edad_perfil">Edad:</string>
+    <string name="ubicacion_del_vendedor">Ubicacion Del Vendedor</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

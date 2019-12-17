@@ -1,5 +1,6 @@
 package com.santiagogonzalez.mercadoesclavodh.controller;
 
+import com.santiagogonzalez.mercadoesclavodh.model.CaracteristicasDelProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.DescripcioDeProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.Producto;
 import com.santiagogonzalez.mercadoesclavodh.model.ProductoContainer;
@@ -38,6 +39,15 @@ public class ProductoController {
         productoDao.traerDescripcionPorId(new ResultListener<DescripcioDeProducto>() {
             @Override
             public void finish(DescripcioDeProducto results) {
+                listResultListener.finish(results);
+            }
+        }, idProducto);
+    }
+
+    public void traerCaracteristicasPorId(String idProducto, final ResultListener<CaracteristicasDelProducto> listResultListener){
+        productoDao.traerCaracteristicasPorId(new ResultListener<CaracteristicasDelProducto>() {
+            @Override
+            public void finish(CaracteristicasDelProducto results) {
                 listResultListener.finish(results);
             }
         }, idProducto);

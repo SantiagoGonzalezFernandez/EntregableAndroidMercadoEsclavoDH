@@ -1,5 +1,6 @@
 package com.santiagogonzalez.mercadoesclavodh.util;
 
+import com.santiagogonzalez.mercadoesclavodh.model.CaracteristicasDelProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.DescripcioDeProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.ProductoContainer;
 
@@ -17,4 +18,7 @@ public interface ProductoService {
 
     @GET("items/{id}/descriptions")
     Call<List<DescripcioDeProducto>> getDescripcionProducto(@Path("id") String idProducto);
+
+    @GET("items/{id}")
+    Call<CaracteristicasDelProducto> getCaracteristicasDelProducto(@Path("id") String idProducto);
 }
