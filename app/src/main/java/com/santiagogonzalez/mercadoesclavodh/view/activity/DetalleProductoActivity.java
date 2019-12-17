@@ -49,7 +49,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
 
     private Boolean myBooleanEsFavorita;
 
-    private CaracteristicasDelProducto caracteristicasDelProducto;
+    private CaracteristicasDelProducto myCaracteristicasDelProducto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +78,11 @@ public class DetalleProductoActivity extends AppCompatActivity {
         myButtonUbicacionDelVendedor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetalleProductoActivity.this, MapsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(DetalleProductoActivity.KEY_CARACTERISTICAS, caracteristicasDelProducto);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                Intent myIntent = new Intent(DetalleProductoActivity.this, MapsActivity.class);
+                Bundle myBundle = new Bundle();
+                myBundle.putSerializable(DetalleProductoActivity.KEY_CARACTERISTICAS, myCaracteristicasDelProducto);
+                myIntent.putExtras(myBundle);
+                startActivity(myIntent);
             }
         });
     }
@@ -90,8 +90,8 @@ public class DetalleProductoActivity extends AppCompatActivity {
     private void traerDescripcionPorId(){
         myProductoController.traerDescripcionPorId(myProducto.getMyStringId(), new ResultListener<DescripcioDeProducto>() {
             @Override
-            public void finish(DescripcioDeProducto results) {
-                myTextViewDescripcionDelProducto.setText(results.getMyStringTextoDescripcion());
+            public void finish(DescripcioDeProducto myResults) {
+                myTextViewDescripcionDelProducto.setText(myResults.getMyStringTextoDescripcion());
             }
         });
     }
@@ -99,15 +99,15 @@ public class DetalleProductoActivity extends AppCompatActivity {
     private void traerCaracteristicasPorId(){
         myProductoController.traerCaracteristicasPorId(myProducto.getMyStringId(), new ResultListener<CaracteristicasDelProducto>() {
             @Override
-            public void finish(CaracteristicasDelProducto results) {
-                caracteristicasDelProducto = results;
-                if (results.getMyStringCondicion().equals("new")){
+            public void finish(CaracteristicasDelProducto myResults) {
+                myCaracteristicasDelProducto = myResults;
+                if (myResults.getMyStringCondicion().equals("new")){
                     myTextViewUsoDelProducto.setText("Condicion: Nuevo");
                 }else{
                     myTextViewUsoDelProducto.setText("Condicion: Usado");
                 }
-                myTextViewUnidadesDisponiblesDelProducto.setText("Unidades Disponibles: "+results.getMyStringCantidadDisponible());
-                myTextViewUnidadesVendidasDelProducto.setText("Unidades Vendidas: "+results.getMyStringCantidadVendida());
+                myTextViewUnidadesDisponiblesDelProducto.setText("Unidades Disponibles: "+myResults.getMyStringCantidadDisponible());
+                myTextViewUnidadesVendidasDelProducto.setText("Unidades Vendidas: "+myResults.getMyStringCantidadVendida());
             }
         });
     }
@@ -160,8 +160,8 @@ public class DetalleProductoActivity extends AppCompatActivity {
         //Configuro que pasa si se clickea el Favorito
         myMenuItemFavorito.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.ToolBarDetalleMenu_Item_favorito) {
+            public boolean onMenuItemClick(MenuItem myMenuItem) {
+                if (myMenuItem.getItemId() == R.id.ToolBarDetalleMenu_Item_favorito) {
                     Toast.makeText(getApplicationContext(), "Favorito", Toast.LENGTH_SHORT).show();
                     myFirestoreController.agregarProductoAFav(myProducto);
                     myBooleanEsFavorita = !myBooleanEsFavorita;
@@ -174,7 +174,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
     }
 
     private void actualizarFav(MenuItem myMenuItemFavorito){
-        //si es favorita muestra corazon lleno
+        //si es favorita muestra corazon lleno 
         if (myBooleanEsFavorita){
             myMenuItemFavorito.setIcon(R.drawable.ic_favorite_black_24dp);
         }
