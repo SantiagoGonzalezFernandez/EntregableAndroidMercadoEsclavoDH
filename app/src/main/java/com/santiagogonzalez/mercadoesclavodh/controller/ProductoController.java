@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ProductoController {
 
-    private ProductoDao productoDao;
+    private ProductoDao myProductoDao;
 
     public static final Integer LIMIT = 10;
     private Integer total;
@@ -20,20 +20,20 @@ public class ProductoController {
     private  Boolean hayUnPedidoEnCurso = false;
 
     public ProductoController() {
-        this.productoDao = new ProductoDao();
+        this.myProductoDao = new ProductoDao();
     }
 
-    public void obtenerResultadoController(final Integer longituLista, String query, final ResultListener<ProductoContainer> escuchadorDeLaVista){
+    public void obtenerResultadoController(final Integer myIntegerSizeDeLaLista, String myStringQuery, final ResultListener<ProductoContainer> myEscuchadorDeLaVista){
         if(!hayUnPedidoEnCurso){
             hayUnPedidoEnCurso = true;
-            productoDao.obtenerResultadoDao(query,new ResultListener<ProductoContainer>() {
+            myProductoDao.obtenerResultadoDao(myStringQuery,new ResultListener<ProductoContainer>() {
                 @Override
                 public void finish(ProductoContainer results) {
                     total = results.getPaging().getTotal();
                     hayUnPedidoEnCurso = false;
                     offset = offset + LIMIT;
-                    escuchadorDeLaVista.finish(results);
-                    if(longituLista + offset >= total){
+                    myEscuchadorDeLaVista.finish(results);
+                    if(myIntegerSizeDeLaLista + offset >= total){
                         trajoMasPost = false;
                     }
                 }
@@ -42,7 +42,7 @@ public class ProductoController {
     }
 
     public void traerProductoPorBusqueda(String productoBusqueda, final ResultListener<List<Producto>> listenerDeLaVista){
-        productoDao.traerProductoPorBusqueda(new ResultListener<List<Producto>>(){
+        myProductoDao.traerProductoPorBusqueda(new ResultListener<List<Producto>>(){
             @Override
             public void finish(List<Producto> result) {
                 listenerDeLaVista.finish(result);
@@ -51,7 +51,7 @@ public class ProductoController {
     }
 
     public void traerDescripcionPorId(String idProducto, final ResultListener<DescripcioDeProducto> listResultListener){
-        productoDao.traerDescripcionPorId(new ResultListener<DescripcioDeProducto>() {
+        myProductoDao.traerDescripcionPorId(new ResultListener<DescripcioDeProducto>() {
             @Override
             public void finish(DescripcioDeProducto results) {
                 listResultListener.finish(results);
@@ -60,7 +60,7 @@ public class ProductoController {
     }
 
     public void traerCaracteristicasPorId(String idProducto, final ResultListener<CaracteristicasDelProducto> listResultListener){
-        productoDao.traerCaracteristicasPorId(new ResultListener<CaracteristicasDelProducto>() {
+        myProductoDao.traerCaracteristicasPorId(new ResultListener<CaracteristicasDelProducto>() {
             @Override
             public void finish(CaracteristicasDelProducto results) {
                 listResultListener.finish(results);

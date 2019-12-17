@@ -8,22 +8,22 @@ import java.util.List;
 
 public class FirestoreController {
 
-    private FirestoreDao firestoreDao;
+    private FirestoreDao myFirestoreDao;
 
     public FirestoreController() {
-        firestoreDao = new FirestoreDao();
+        myFirestoreDao = new FirestoreDao();
     }
 
     public void agregarProductoAFav(Producto myProducto){
-        firestoreDao.agregarProductoAFav(myProducto);
+        myFirestoreDao.agregarProductoAFav(myProducto);
     }
 
-    //traigo las peliculas y se las paso a la vista
-    public void traerListaDeFavorito(final ResultListener<List<Producto>> listenerDeLaVista){
-        firestoreDao.traerProductosFavoritos(new ResultListener<List<Producto>>() {
+    //traigo los productos y se las paso a la vista
+    public void traerListaDeFavorito(final ResultListener<List<Producto>> myListenerDeLaVista){
+        myFirestoreDao.traerProductosFavoritos(new ResultListener<List<Producto>>() {
             @Override
             public void finish(List<Producto> result) {
-                listenerDeLaVista.finish(result);
+                myListenerDeLaVista.finish(result);
             }
         });
     }
