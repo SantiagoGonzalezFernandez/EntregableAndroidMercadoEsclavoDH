@@ -25,6 +25,10 @@ public class ProductoRVAdapter extends RecyclerView.Adapter {
         this.myProductoList = myProductoList;
     }
 
+    public List<Producto> getMyProductoList() {
+        return myProductoList;
+    }
+
     public void actualizarLista(List<Producto> myProductoList) {
         this.myProductoList = myProductoList;
         notifyDataSetChanged();

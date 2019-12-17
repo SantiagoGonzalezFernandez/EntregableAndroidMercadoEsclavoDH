@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +35,7 @@ import com.santiagogonzalez.mercadoesclavodh.view.fragment.PerfilFragment;
 import com.santiagogonzalez.mercadoesclavodh.view.fragment.SobreDesarrolladorFragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ProductoRVAdapter.ListenerDelAdapter {
@@ -97,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         myRecyclerViewProductos.setLayoutManager(myLinearLayoutManager);
         myRecyclerViewProductos.setAdapter(myAdapterProducto);
         myRecyclerViewProductos.setHasFixedSize(true);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(myRecyclerViewProductos);
     }
 
     private void encuentroComponentesPorId() {
@@ -130,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void removerFragments() {
-        if (myFragmentActual != null){
+        if (myFragmentActual != null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .remove(getSupportFragmentManager().findFragmentById(R.id.MainActivity_FrameLayout_ContenedorDeFragment))
@@ -263,4 +268,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Iniciamos la activity
         startActivity(myIntent);
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+
+            int posicionActual = viewHolder.getAdapterPosition();
+            int toPosition = target.getAdapterPosition();
+            List<Producto> productoList = myAdapterProducto.getMyProductoList();
+
+            Collections.swap(productoList,posicionActual,toPosition);
+
+            recyclerView.getAdapter().notifyItemMoved(posicionActual,toPosition);
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+        }
+    };
 }
