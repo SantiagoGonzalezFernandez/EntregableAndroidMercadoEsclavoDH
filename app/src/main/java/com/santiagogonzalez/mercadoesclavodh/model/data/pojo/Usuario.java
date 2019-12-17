@@ -1,71 +1,79 @@
 package com.santiagogonzalez.mercadoesclavodh.model.data.pojo;
 
+import com.google.gson.annotations.SerializedName;
+
+
 public class Usuario {
 
-    private String nombre;
-    private String apellido;
-    private String edad;
-    private String email;
-    private String nacionalidad;
-    private String password;
+    private String myStringNombre;
 
-    public Usuario(String nombre, String apellido, String edad, String email, String nacionalidad, String password) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.edad = edad;
-        this.email = email;
-        this.nacionalidad = nacionalidad;
-        this.password = password;
-    }
+    private String myStringApellido;
+
+    private String myStringEdad;
+
+    private String myStringEmail;
+
+    private String myStringNacionalidad;
+
+    private String myStringPassword;
 
     public Usuario() {
     }
 
-    public String getNombre() {
-        return nombre;
+    public Usuario(String myStringNombre, String myStringApellido, String myStringEdad, String myStringEmail, String myStringNacionalidad, String myStringPassword) {
+        this.myStringNombre = myStringNombre;
+        this.myStringApellido = myStringApellido;
+        this.myStringEdad = myStringEdad;
+        this.myStringEmail = myStringEmail;
+        this.myStringNacionalidad = myStringNacionalidad;
+        this.myStringPassword = myStringPassword;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public String getMyStringNombre() {
+        return myStringNombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public void setMyStringNombre(String myStringNombre) {
+        this.myStringNombre = myStringNombre;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public String getMyStringApellido() {
+        return myStringApellido;
     }
 
-    public String getEdad() {
-        return edad;
+    public void setMyStringApellido(String myStringApellido) {
+        this.myStringApellido = myStringApellido;
     }
 
-    public void setEdad(String edad) {
-        this.edad = edad;
+    public String getMyStringEdad() {
+        return myStringEdad;
     }
 
-    public String getEmail() {
-        return email;
+    public void setMyStringEdad(String myStringEdad) {
+        this.myStringEdad = myStringEdad;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getMyStringEmail() {
+        return myStringEmail;
     }
 
-    public String getNacionalidad() {
-        return nacionalidad;
+    public void setMyStringEmail(String myStringEmail) {
+        this.myStringEmail = myStringEmail;
     }
 
-    public void setNacionalidad(String nacionalidad) {
-        this.nacionalidad = nacionalidad;
+    public String getMyStringNacionalidad() {
+        return myStringNacionalidad;
     }
 
-    public String getPassword() {
-        return password;
+    public void setMyStringNacionalidad(String myStringNacionalidad) {
+        this.myStringNacionalidad = myStringNacionalidad;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getMyStringPassword() {
+        return myStringPassword;
+    }
+
+    public void setMyStringPassword(String myStringPassword) {
+        this.myStringPassword = myStringPassword;
     }
 }

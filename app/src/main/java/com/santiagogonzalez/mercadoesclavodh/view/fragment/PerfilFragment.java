@@ -66,11 +66,11 @@ public class PerfilFragment extends Fragment {
                                 if (myDocumentSnapshot.exists()){
                                     myUsuario = myDocumentSnapshot.toObject(Usuario.class);
 
-                                    myTextViewNombre.setText(myUsuario.getNombre());
-                                    myTextViewApellido.setText(myUsuario.getApellido());
-                                    myTextViewEdad.setText(myUsuario.getEdad());
-                                    myTextViewEmail.setText(myUsuario.getEmail());
-                                    myTextViewNacionalidad.setText(myUsuario.getNacionalidad());
+                                    myTextViewNombre.setText(myUsuario.getMyStringNombre());
+                                    myTextViewApellido.setText(myUsuario.getMyStringApellido());
+                                    myTextViewEdad.setText(myUsuario.getMyStringEdad());
+                                    myTextViewEmail.setText(myUsuario.getMyStringEmail());
+                                    myTextViewNacionalidad.setText(myUsuario.getMyStringNacionalidad());
                                 }else{
                                     Toast.makeText(getContext(), "Si quieres un perfil mas completo registrate usando nuestra app", Toast.LENGTH_SHORT).show();
                                 }

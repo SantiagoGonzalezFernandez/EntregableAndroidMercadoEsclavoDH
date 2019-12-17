@@ -140,7 +140,7 @@ public class RegistroActivity extends AppCompatActivity {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     CollectionReference myCollectionReference = db.collection("usuarios");
                     Usuario myUsuario = new Usuario(myStringNombre, myStringApellido, myStringEdad, myStringEmail, myStringNacionalidad, myStringPassword);
-                    myCollectionReference.document(myUsuario.getEmail()).set(myUsuario).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    myCollectionReference.document(myUsuario.getMyStringEmail()).set(myUsuario).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             Toast.makeText(RegistroActivity.this, "Se a registrado el usuario correctamente", Toast.LENGTH_SHORT).show();

@@ -23,7 +23,7 @@ public class FirestoreDao {
 
     //pasos a seguir para que esto funcione
     //1 el container tiene que tener metodos para agregar sacar chequear si exite (no obligatorio pero mas comodo
-    //2 peliculas tien que tenes equals para compara y contructor vacio
+    //2 productos tien que tenes equals para compara y contructor vacio
 
 
     //inicializo mis servicion en el contructor del DAO
@@ -37,7 +37,7 @@ public class FirestoreDao {
 
 
     public void agregarProductoAFav(Producto myProducto){
-        //le pregunto si la pelicula que quiero agregar ya se encuentra en favs
+        //le pregunto si el producto que quiero agregar ya se encuentra en favs
         if (myProductoContainer.contieneElProducto(myProducto)){
             //si esta la saco
             myProductoContainer.removerProducto(myProducto);
@@ -72,7 +72,7 @@ public class FirestoreDao {
         });
     }
 
-    public void traerProductosFavoritos(final ResultListener<List<Producto>> listenerDelController){
+    public void traerProductosFavoritos(final ResultListener<List<Producto>> myListenerDelController){
         //traigo la referencia y le intento traer la lista
         myFirebaseFirestore.collection(PRODUCTOS_FAVORITOS)
                 .document(myFirebaseUser.getUid())
@@ -84,7 +84,7 @@ public class FirestoreDao {
                 if (myProductoContainer == null){
                     myProductoContainer = new ProductoContainer();
                 }
-                listenerDelController.finish(myProductoContainer.getMyProductoListResultado());
+                myListenerDelController.finish(myProductoContainer.getMyProductoListResultado());
             }
         })
                 .addOnFailureListener(new OnFailureListener() {
@@ -93,7 +93,7 @@ public class FirestoreDao {
                     public void onFailure(@NonNull Exception e) {
                         myProductoContainer = new ProductoContainer();
                         //ademas de actualizar la lista se lo doy a la vista que lo va a necesitar
-                        listenerDelController.finish(myProductoContainer.getMyProductoListResultado());
+                        myListenerDelController.finish(myProductoContainer.getMyProductoListResultado());
                     }
                 });
     }
