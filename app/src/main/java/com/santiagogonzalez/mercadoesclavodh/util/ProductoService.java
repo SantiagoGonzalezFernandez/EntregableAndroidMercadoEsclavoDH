@@ -14,17 +14,17 @@ import retrofit2.http.Query;
 public interface ProductoService {
 
     @GET("sites/MLA/search")
-    Call<ProductoContainer> getCallService(@Query("q") String productoBuscado,
-                                           @Query("limit") Integer limit);
+    Call<ProductoContainer> getCallProductosPorBusqueda(@Query("q") String myStringQuery,
+                                           @Query("limit") Integer myIntegerLimit);
 
     @GET("sites/MLA/search")
-    Call<ProductoContainer> getCallAgregarMasProductos(@Query("q") String productoBuscado,
-                                            @Query("offset") Integer offset,
-                                            @Query("limit") Integer limit);
+    Call<ProductoContainer> getCallAgregarProductos(@Query("q") String myStringQuery,
+                                            @Query("offset") Integer myIntegerOffset,
+                                            @Query("limit") Integer myIntegerLimit);
 
     @GET("items/{id}/descriptions")
-    Call<List<DescripcioDeProducto>> getDescripcionProducto(@Path("id") String idProducto);
+    Call<List<DescripcioDeProducto>> getCallDescripcionProducto(@Path("id") String myStringIdProducto);
 
     @GET("items/{id}")
-    Call<CaracteristicasDelProducto> getCaracteristicasDelProducto(@Path("id") String idProducto);
+    Call<CaracteristicasDelProducto> getCallCaracteristicasDelProducto(@Path("id") String myStringIdProducto);
 }

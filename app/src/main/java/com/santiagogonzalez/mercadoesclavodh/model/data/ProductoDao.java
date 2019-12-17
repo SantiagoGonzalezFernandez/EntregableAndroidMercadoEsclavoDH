@@ -36,7 +36,7 @@ public class ProductoDao {
     }
 
     public void obtenerResultadoDao(String myStringQuery, final ResultListener<ProductoContainer> myEscuchadorDelControler, Integer myIntegerOffset, Integer myIntegerTotal){
-        Call<ProductoContainer> myCallProductos = myProductoService.getCallAgregarMasProductos(myStringQuery,myIntegerOffset,myIntegerTotal);
+        Call<ProductoContainer> myCallProductos = myProductoService.getCallAgregarProductos(myStringQuery,myIntegerOffset,myIntegerTotal);
 
         myCallProductos.enqueue(new Callback<ProductoContainer>() {
             @Override
@@ -53,7 +53,7 @@ public class ProductoDao {
     }
 
     public void traerProductoPorBusqueda(final ResultListener<List<Producto>> resultListenerController, String myStringQuery){
-        Call<ProductoContainer> myCall = myProductoService.getCallService(myStringQuery,0);
+        Call<ProductoContainer> myCall = myProductoService.getCallProductosPorBusqueda(myStringQuery,0);
 
         myCall.enqueue(new Callback<ProductoContainer>() {
             @Override
@@ -70,7 +70,7 @@ public class ProductoDao {
     }
 
     public void traerDescripcionPorId(final ResultListener<DescripcioDeProducto> myResultListener, String myStringIdProducto){
-        Call<List<DescripcioDeProducto>> myCall = myProductoService.getDescripcionProducto(myStringIdProducto);
+        Call<List<DescripcioDeProducto>> myCall = myProductoService.getCallDescripcionProducto(myStringIdProducto);
 
         myCall.enqueue(new Callback<List<DescripcioDeProducto>>() {
             @Override
@@ -87,7 +87,7 @@ public class ProductoDao {
     }
 
     public void traerCaracteristicasPorId(final ResultListener<CaracteristicasDelProducto> myResultListener, String myStringIdProducto){
-        Call<CaracteristicasDelProducto> myCall = myProductoService.getCaracteristicasDelProducto(myStringIdProducto);
+        Call<CaracteristicasDelProducto> myCall = myProductoService.getCallCaracteristicasDelProducto(myStringIdProducto);
 
         myCall.enqueue(new Callback<CaracteristicasDelProducto>() {
             @Override
