@@ -1,45 +1,50 @@
 package com.santiagogonzalez.mercadoesclavodh.model.data.pojo;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Paging implements Serializable {
 
-    private Integer total;
+    @SerializedName("total")
+    private Integer myIntegerTotal;
 
-    private Integer offset;
+    @SerializedName("offset")
+    private Integer myIntegerOffset;
 
-    private Integer limit;
+    @SerializedName("limit")
+    private Integer myIntegerLimit;
 
     public Paging() {
     }
 
-    public Integer getTotal() {
-        return total;
+    public Paging(Integer myIntegerTotal, Integer myIntegerOffset, Integer myIntegerLimit) {
+        this.myIntegerTotal = myIntegerTotal;
+        this.myIntegerOffset = myIntegerOffset;
+        this.myIntegerLimit = myIntegerLimit;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
+    public Integer getMyIntegerTotal() {
+        return myIntegerTotal;
     }
 
-    public Integer getOffset() {
-        return offset;
+    public void setMyIntegerTotal(Integer myIntegerTotal) {
+        this.myIntegerTotal = myIntegerTotal;
     }
 
-    public void setOffset(Integer offset) {
-        this.offset = offset;
+    public Integer getMyIntegerOffset() {
+        return myIntegerOffset;
     }
 
-    public Integer getLimit() {
-        return limit;
+    public void setMyIntegerOffset(Integer myIntegerOffset) {
+        this.myIntegerOffset = myIntegerOffset;
     }
 
-    public void setLimit(Integer limit) {
-        this.limit = limit;
+    public Integer getMyIntegerLimit() {
+        return myIntegerLimit;
     }
 
-    public Paging(Integer total, Integer offset, Integer limit) {
-        this.total = total;
-        this.offset = offset;
-        this.limit = limit;
+    public void setMyIntegerLimit(Integer myIntegerLimit) {
+        this.myIntegerLimit = myIntegerLimit;
     }
 }
