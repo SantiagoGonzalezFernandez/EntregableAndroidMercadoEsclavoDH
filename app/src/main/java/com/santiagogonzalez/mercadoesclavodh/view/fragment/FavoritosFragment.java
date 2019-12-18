@@ -88,4 +88,6 @@ public class FavoritosFragment extends Fragment implements FavoritoAdapter.Liste
     public interface ListenerDelFragment {
         public void recibirProducto(Producto myProducto);
     }
+
+    //Acabo de terminar la app (:
 }
