@@ -20,15 +20,6 @@ public class ProductoContainer implements Serializable {
         this.myProductoListResultado = myProductoListResultado;
     }
 
-    public ProductoContainer(Paging myPaging) {
-        this.myPaging = myPaging;
-    }
-
-    public ProductoContainer(List<Producto> myProductoListResultado, Paging myPaging) {
-        this.myProductoListResultado = myProductoListResultado;
-        this.myPaging = myPaging;
-    }
-
     public ProductoContainer() {
         myProductoListResultado = new ArrayList<>();
     }
@@ -48,6 +39,7 @@ public class ProductoContainer implements Serializable {
     public void setMyPaging(Paging myPaging) {
         this.myPaging = myPaging;
     }
+
 
     public void agregarProducto(Producto myProducto){
         myProductoListResultado.add(myProducto);

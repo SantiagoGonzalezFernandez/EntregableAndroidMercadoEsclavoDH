@@ -15,6 +15,9 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.santiagogonzalez.mercadoesclavodh.R;
 import com.santiagogonzalez.mercadoesclavodh.controller.FirestoreController;
 import com.santiagogonzalez.mercadoesclavodh.controller.ProductoController;
@@ -23,6 +26,8 @@ import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.CaracteristicasDelP
 import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.DescripcioDeProducto;
 import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
 import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
+
+import java.util.List;
 
 public class DetalleProductoActivity extends AppCompatActivity {
 
@@ -46,13 +51,12 @@ public class DetalleProductoActivity extends AppCompatActivity {
 
     private ProductoController myProductoController;
 
-    private FirestoreController myFirestoreController;
-
-    private Boolean myBooleanEsFavorita;
-
     private CaracteristicasDelProducto myCaracteristicasDelProducto;
 
-    private ProductoContainer myProductoContainer;
+    private FloatingActionButton myFloatingActionButtonFavorito;
+    private FirebaseUser myFirebaseUser;
+    private FirestoreController myFirestoreController;
+    private Boolean esFavorito;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,40 @@ public class DetalleProductoActivity extends AppCompatActivity {
 
         configuroLosComponentesConLosDatosDelProducto();
 
+        myFloatingActionButtonFavorito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (myFirebaseUser == null) {
+                    Toast.makeText(getApplicationContext(), "Debes estar Logeado", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
+                myFirestoreController.agregarProductoAFav(myProducto);
+                esFavorito = !esFavorito;
+                actualizarFav();
+            }
+        });
+
+        myFirestoreController.traerListaDeFavorito(new ResultListener<List<Producto>>() {
+            @Override
+            public void finish(List<Producto> result) {
+                esFavorito = result.contains(myProducto);
+                actualizarFav();
+                habilitarOnClickDeFav();
+            }
+        });
+
+    }
+
+    private void actualizarFav(){
+        if (esFavorito){
+            myFloatingActionButtonFavorito.setImageResource(R.drawable.ic_favorite_black_24dp); }
+        else {
+            myFloatingActionButtonFavorito.setImageResource(R.drawable.ic_favorite_border_black_24dp); }
+    }
+
+    private void habilitarOnClickDeFav() {
+        myFloatingActionButtonFavorito.setClickable(true);
     }
 
     private void configuroElBotonUbicacionDelVendedor() {
@@ -118,8 +156,8 @@ public class DetalleProductoActivity extends AppCompatActivity {
     private void inizializoLosComponentes(){
         myProductoController = new ProductoController();
         myDescripcioDeProducto = new DescripcioDeProducto();
+        myFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         myFirestoreController = new FirestoreController();
-        myProductoContainer = new ProductoContainer();
     }
 
     private void configuroLosComponentesConLosDatosDelProducto(){
@@ -136,6 +174,8 @@ public class DetalleProductoActivity extends AppCompatActivity {
 
     private void encontrarComponentesPorId() {
         myToolbar = findViewById(R.id.DetalleProductoActivity_Include_Toolbar);
+
+        myFloatingActionButtonFavorito = findViewById(R.id.DetalleProductoActivity_FloatingActionButton_Favorito);
 
         myImageViewImagenDelProducto = findViewById(R.id.DetalleProductoActivity_ImageView_ImagenDelProducto);
         myTextViewTituloDelProducto = findViewById(R.id.DetalleProductoActivity_TextView_TituloDelProducto);
@@ -157,36 +197,7 @@ public class DetalleProductoActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         //Inflo el toolbar
         getMenuInflater().inflate(R.menu.toolbar_detalle_menu, menu);
-
-        //Encuentro los componentes del menu
-        final MenuItem myMenuItemFavorito = menu.findItem(R.id.ToolBarDetalleMenu_Item_favorito);
-
-        //Configuro que pasa si se clickea el Favorito
-        myMenuItemFavorito.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem myMenuItem) {
-                if (myMenuItem.getItemId() == R.id.ToolBarDetalleMenu_Item_favorito) {
-                    Toast.makeText(getApplicationContext(), "Favorito", Toast.LENGTH_SHORT).show();
-                    myBooleanEsFavorita = myProductoContainer.contieneElProducto(myProducto);
-                    actualizarFav(myMenuItemFavorito);
-                    myFirestoreController.agregarProductoAFav(myProducto);
-                    myBooleanEsFavorita = !myBooleanEsFavorita;
-                }
-                return true;
-            }
-        });
         return true;
     }
 
-    private void actualizarFav(MenuItem myMenuItemFavorito){
-        //si es favorita muestra corazon lleno 
-        if (myBooleanEsFavorita){
-            myMenuItemFavorito.setIcon(R.drawable.ic_favorite_black_24dp);
-        }
-        else
-        {
-            //sino vacio
-            myMenuItemFavorito.setIcon(R.drawable.ic_favorite_border_black_24dp);
-        }
-    }
 }

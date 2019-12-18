@@ -2,10 +2,14 @@ package com.santiagogonzalez.mercadoesclavodh.view.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,10 +17,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.santiagogonzalez.mercadoesclavodh.R;
+import com.santiagogonzalez.mercadoesclavodh.controller.FirestoreController;
 import com.santiagogonzalez.mercadoesclavodh.controller.ProductoController;
 import com.santiagogonzalez.mercadoesclavodh.model.ProductoContainer;
 import com.santiagogonzalez.mercadoesclavodh.model.data.pojo.Producto;
+import com.santiagogonzalez.mercadoesclavodh.util.ResultListener;
+import com.santiagogonzalez.mercadoesclavodh.view.activity.DetalleProductoActivity;
+import com.santiagogonzalez.mercadoesclavodh.view.activity.MainActivity;
+import com.santiagogonzalez.mercadoesclavodh.view.adapter.FavoritoAdapter;
 import com.santiagogonzalez.mercadoesclavodh.view.adapter.ProductoRVAdapter;
 
 import java.util.ArrayList;
@@ -26,15 +37,13 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoritosFragment extends Fragment implements ProductoRVAdapter.ListenerDelAdapter{
+public class FavoritosFragment extends Fragment implements FavoritoAdapter.ListenerDelAdapter {
 
+    private ListenerDelFragment myListenerDelFragment;
     private RecyclerView myRecyclerView;
-    private ProductoRVAdapter myProductoRVAdapter;
-    private ProductoContainer myProductoContainer;
-
-    private List<Producto> myProductoList;
-
-    private ListenerDeFragment myListenerDeFragment;
+    private FavoritoAdapter myFavoritoAdapter;
+    private FirestoreController myFirestoreController;
+    private FirebaseUser myCurrentUser;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,48 +51,41 @@ public class FavoritosFragment extends Fragment implements ProductoRVAdapter.Lis
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_favoritos, container, false);
 
-        encontrarComponentesPorId(view);
+        encuentroComponentePorId(view);
 
-        inicializarComponentes();
+        myFirestoreController = new FirestoreController();
+        myFavoritoAdapter = new FavoritoAdapter(this);
+        myCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        myFirestoreController.traerListaDeFavorito(new ResultListener<List<Producto>>() {
+            @Override
+            public void finish(List<Producto> result) {
+                myFavoritoAdapter.setFavoritoList(result);
+            }
+        });
 
-        traerProductosFavoritos();
+        LinearLayoutManager myLinearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
 
-        configurarRecycler();
+        DividerItemDecoration myDividerItemDecoration = new DividerItemDecoration(myRecyclerView.getContext(),
+                myLinearLayoutManager.getOrientation());
+
+        myRecyclerView.addItemDecoration(myDividerItemDecoration);
+        myRecyclerView.setLayoutManager(myLinearLayoutManager);
+        myRecyclerView.setAdapter(myFavoritoAdapter);
+        myRecyclerView.setHasFixedSize(true);
+
         return view;
     }
 
-    private void encontrarComponentesPorId(View view){
+    private void encuentroComponentePorId(View view) {
         myRecyclerView = view.findViewById(R.id.FavoritoFragment_RecyclerView_ListaDeFavoritos);
     }
 
-    private void inicializarComponentes() {
-        myProductoRVAdapter = new ProductoRVAdapter(this);
-        myProductoContainer = new ProductoContainer();
-        myProductoList = new ArrayList<>();
-    }
-
-    private void traerProductosFavoritos(){
-        myProductoList = myProductoContainer.getMyProductoListResultado();
-        myProductoRVAdapter.setMyProductoList(myProductoList);
-    }
-
-    private void configurarRecycler(){
-        myRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),myRecyclerView.VERTICAL,false));
-        myRecyclerView.setAdapter(myProductoRVAdapter);
-    }
-
-/*    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        myListenerDeFragment = (ListenerDeFragment) context;
-    }*/
-
     @Override
     public void informarProducto(Producto myProducto) {
-        myListenerDeFragment.recibirProducto(myProducto);
+        myListenerDelFragment.recibirProducto(myProducto);
     }
 
-    public interface ListenerDeFragment{
+    public interface ListenerDelFragment {
         public void recibirProducto(Producto myProducto);
     }
 }
