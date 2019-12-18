@@ -11,18 +11,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Productos Favoritos"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/colorTexto"/>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/FavoritoFragment_RecyclerView_ListaDeFavoritos"
-            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
